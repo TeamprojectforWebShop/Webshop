@@ -112,15 +112,13 @@ public class HomeController {
 		}
 		return mv;
 	} */
-	@RequestMapping(value ="logout.do", method = RequestMethod.POST) //로그아웃 처리
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(@RequestParam Map<String, Object> map, HttpServletRequest req) {
-		
-		ModelAndView mv = new ModelAndView("/logout");
-		
-		//Map<String, Object> list = commonService.logout(null);
-		//mv.addObject("list", list);
+		ModelAndView mv = new ModelAndView("redirect:/");
+		Map<String, Object> userLogout = commonService.logout(map); 
 		return mv;
 	}
+	
 	//여기에 받아오는 MAP은 사용자가 JSP에서 입력한 값을 받아오는 MAP key value
 	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST) //매핑 요청 값, 방법 
 	public ModelAndView loginCheck(@RequestParam Map<String, Object> map, HttpServletRequest req) { //

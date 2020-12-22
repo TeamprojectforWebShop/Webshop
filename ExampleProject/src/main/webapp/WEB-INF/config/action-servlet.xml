@@ -21,13 +21,26 @@
 			</mvc:argument-resolvers>
 		</mvc:annotation-driven>
 		
-		<mvc:interceptors>
-			<mvc:interceptor>
-				<mvc:mapping path="/**"/>
-				<bean id="loggerInterceptor" class="com.example.common.logger.LoggerInterceptor"></bean>
-			</mvc:interceptor>
-		</mvc:interceptors>
-		
+    <mvc:interceptors> <!-- interceptors 추가 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/"/>
+            <bean id="loggerInterceptor" class="com.example.common.logger.LoggerInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/"/>
+            <!-- View -->
+            <mvc:exclude-mapping path="/index.do"/> <!-- 로그인 없어도 되어야하는 주소를 적어줌 -->
+            <mvc:exclude-mapping path="/login.do"/>
+            <mvc:exclude-mapping path="/main.do"/>
+            <!-- Return Objects Method -->
+            <mvc:exclude-mapping path="/loginCheck.do"/>
+            <!-- Test -->
+            <mvc:exclude-mapping path="/test.do"/>
+
+            <bean id="loginInterceptor" class="com.example.common.logger.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 		<aop:aspectj-autoproxy/>
 		<bean id="loggerAspect" class="com.example.common.logger.LoggerAspect" />
 		
