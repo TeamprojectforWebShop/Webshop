@@ -12,6 +12,10 @@
 </head>
 
 <body>
+	<c:if test="${map.msg ne null }">
+		<!-- 메세지 온게 있으면 alert으로 출력하는거 -->
+		<script>alert('${map.msg}');</script>
+	</c:if>
     <div id="header_form">
         <header class="header_top">
             <span class="left_menu"><a href="#">문의장소</a></span>
