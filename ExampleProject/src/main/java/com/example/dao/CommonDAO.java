@@ -17,7 +17,10 @@ public class CommonDAO extends AbstractDAO {
 		return (List<Map<String, Object>>)selectList("common.getList", map);} 
 	//common.getList의 common은 common_sql의 mapper namespace="common"
 	
-	public Map<String, Object> loginCheck(Map<String, Object> map) {
+	public Map<String, Object> loginCheck(Map<String, Object> map) { //회원 로그인 체크
 		return (Map<String, Object>)selectOne("common.loginCheck", map);} 
+	
+	public Map<String, Object> logout(Map<String, Object> map) { //회원 로그아웃
+		return (Map<String, Object>)delete("common.logout", map);} 
 	
 }

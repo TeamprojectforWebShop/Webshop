@@ -17,6 +17,7 @@
             <span class="left_menu"><a href="#">문의장소</a></span>
             <span class="right_menu">
                 <a href="login.do">로그인</a>
+                <a href="logout.do">로그아웃</a>
                 <a href="mypage.do">마이페이지</a>
          	    <a href="#">장바구니</a>
                 <a href="#">Q&A</a></span>
