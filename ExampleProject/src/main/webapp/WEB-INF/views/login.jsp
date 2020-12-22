@@ -9,7 +9,6 @@
     <title>main</title>
     <link rel="stylesheet" type="text/css" href="resources/css/login.css">
 </head>
-
 <body>
     <div id="header_form">
         <header class="header_top">

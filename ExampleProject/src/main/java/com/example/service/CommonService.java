@@ -22,6 +22,10 @@ public class CommonService {
 
 	public Map<String, Object > loginCheck(Map<String, Object> map)
 	{ 
-		return commonDAO.loginCheck(map);}
+		return commonDAO.loginCheck(map);} //회원 로그인 체크
+	
+	public Map<String, Object > logout(Map<String, Object> map)
+	{ 
+		return commonDAO.logout(map);} //회원 로그아웃
 }
 

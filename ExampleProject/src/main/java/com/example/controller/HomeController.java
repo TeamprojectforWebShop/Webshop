@@ -58,7 +58,6 @@ public class HomeController {
 		return mv;
 	}
 
-
 	@RequestMapping(value = "mypage.do" , method = RequestMethod.GET)
 	public ModelAndView mypage(@RequestParam Map<String, Object> map) {
 		log.debug("Request Parameter : " + map);
@@ -92,7 +91,7 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/sample/openSample.do", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/sample/openSample.do", method = RequestMethod.GET)
 	public ModelAndView test(@RequestParam Map<String, Object> map) {
 		log.debug("map : " + map);
 
@@ -112,7 +111,14 @@ public class HomeController {
 			}
 		}
 		return mv;
+	} */
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	public ModelAndView logout(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView("redirect:/");
+		Map<String, Object> userLogout = commonService.logout(map); 
+		return mv;
 	}
+	
 	//여기에 받아오는 MAP은 사용자가 JSP에서 입력한 값을 받아오는 MAP key value
 	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST) //매핑 요청 값, 방법 
 	public ModelAndView loginCheck(@RequestParam Map<String, Object> map, HttpServletRequest req) { //
@@ -122,10 +128,16 @@ public class HomeController {
 		Map<String, Object> userInfo = commonService.loginCheck(map); 
 		if(userInfo != null) { //널 체크
 			HttpSession s = req.getSession(); //세션 생성
-			s.setAttribute("userInfo", userInfo); //세션에 속성값 부여	
+			s.setAttribute("userInfo", userInfo); //세션에 속성값 부여
+			mv.addObject("msg", "success"); //성공 확인
+		} else {
+			mv.setViewName("/login");
+			mv.addObject("msg", "failure"); //실패 확인
 		}
 		
 		return mv;
+		
+		
 	}
 
 }
