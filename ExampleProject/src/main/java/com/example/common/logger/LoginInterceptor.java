@@ -1,7 +1,5 @@
 package com.example.common.logger;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
@@ -10,7 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Slf4j
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	protected Log log = LogFactory.getLog(LoggerInterceptor.class);

@@ -43,6 +43,7 @@ public class HomeController {
 				
 		List<Map<String, Object>> list = commonService.getList(null);
 		mv.addObject("list", list);
+		mv.addObject("map", map);
 		return mv;
 	}
 	
@@ -77,7 +78,9 @@ public class HomeController {
 				
 		List<Map<String, Object>> list = commonService.getList(null);
 		mv.addObject("list", list);
+		mv.addObject("map", map);
 		return mv;
+	
 	}
 	
 	@RequestMapping(value = { "product_ex" }, method = RequestMethod.GET)
@@ -136,8 +139,25 @@ public class HomeController {
 		}
 		
 		return mv;
+	}
+		@RequestMapping(value = "joinCheck.do", method = RequestMethod.POST) //매핑 요청 값, 방법 
+		public ModelAndView joinCheck(@RequestParam Map<String, Object> map, HttpServletRequest req) { //
+		log.debug("Request Parameter : " + map); //콘솔 로그 출	
+			ModelAndView mv = new ModelAndView("redirect:/"); //괄호 안의 값을 보여주는것, 이동하는것이 x 
+			int rs = commonService.joinCheck(map); 
 		
+			if(rs > 0) { //널 체크
+				HttpSession s = req.getSession(); //세션 생성
+				s.setAttribute("userInfo", map); //세션에 속성값 부여
+				mv.addObject("msg", "회원가입 성공");
+			} else {
+				mv.setViewName("redirect:/join.do");
+				mv.addObject("msg", "회원가입 실패");
+			}
+		return mv;
+
+			
+	}
 		
 	}
 
-}

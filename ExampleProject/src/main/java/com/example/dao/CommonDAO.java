@@ -22,5 +22,8 @@ public class CommonDAO extends AbstractDAO {
 	
 	public Map<String, Object> logout(Map<String, Object> map) { //회원 로그아웃
 		return (Map<String, Object>)delete("common.logout", map);} 
+
+	public int joinCheck(Map<String, Object> map) {
+		return (Integer) insert("common.joinCheck", map);} 
 	
 }
