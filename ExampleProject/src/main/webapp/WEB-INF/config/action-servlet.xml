@@ -22,11 +22,19 @@
 		</mvc:annotation-driven>
 		
     <mvc:interceptors> <!-- interceptors 추가 -->
+       
+        <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+                <property name="cacheSeconds" value="0"/>
+                <property name="useExpiresHeader" value="false"/>
+                <property name="useCacheControlHeader" value="true"/>
+                <property name="useCacheControlNoStore" value="true"/>
+            </bean>     
+        
         <mvc:interceptor>
+        
             <mvc:mapping path="/"/>
             <bean id="loggerInterceptor" class="com.example.common.logger.LoggerInterceptor"/>
         </mvc:interceptor>
-
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <!-- View -->
@@ -39,8 +47,10 @@
             <mvc:exclude-mapping path="/test.do"/>
 
             <bean id="loginInterceptor" class="com.example.common.logger.LoginInterceptor"/>
+            
         </mvc:interceptor>
     </mvc:interceptors>
+    
 		<aop:aspectj-autoproxy/>
 		<bean id="loggerAspect" class="com.example.common.logger.LoggerAspect" />
 		

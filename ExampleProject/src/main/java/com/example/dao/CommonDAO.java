@@ -3,6 +3,8 @@ package com.example.dao;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 //기록저장소 
@@ -20,8 +22,12 @@ public class CommonDAO extends AbstractDAO {
 	public Map<String, Object> loginCheck(Map<String, Object> map) { //회원 로그인 체크
 		return (Map<String, Object>)selectOne("common.loginCheck", map);} 
 	
-	public Map<String, Object> logout(Map<String, Object> map) { //회원 로그아웃
-		return (Map<String, Object>)delete("common.logout", map);} 
+/*	public Map<String, Object> logout(Map<String, Object> map) { //회원 로그아웃
+		return (Map<String, Object>)delete("common.logout", map);} */
+	public void logout(HttpSession session) {
+		System.out.println("===> 로그아웃 기능 처리");
+		session.invalidate();
+	}
 
 	public int joinCheck(Map<String, Object> map) {
 		return (Integer) insert("common.joinCheck", map);} 

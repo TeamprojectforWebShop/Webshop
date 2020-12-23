@@ -114,10 +114,20 @@ public class HomeController {
 		}
 		return mv;
 	} */
-	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	/*@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(@RequestParam Map<String, Object> map, HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView("redirect:/");
 		Map<String, Object> userLogout = commonService.logout(map); 
+		return mv;
+	}*/
+	@RequestMapping("logout.do")
+	public ModelAndView logout(HttpSession session) {
+		
+		commonService.logout(session);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:index.do");
+		mv.addObject("msg", "logout");
+		
 		return mv;
 	}
 	
@@ -131,7 +141,10 @@ public class HomeController {
 		if(userInfo != null) { //널 체크
 			HttpSession s = req.getSession(); //세션 생성
 			s.setAttribute("userInfo", userInfo); //세션에 속성값 부여
+			s.setMaxInactiveInterval(30*60); //세션 시간
 			mv.addObject("msg", "success"); //성공 확인
+			
+			
 		} else {
 			mv.setViewName("/login");
 			mv.addObject("msg", "failure"); //실패 확인
@@ -149,6 +162,7 @@ public class HomeController {
 	            HttpSession s = req.getSession(); //세션 생성
 	            s.setAttribute("userInfo", map); //세션에 속성값 부여
 	            mv.addObject("msg", "회원가입 성공");
+	            
 	         } else {
 	            mv.setViewName("redirect:/join.do");
 	            mv.addObject("msg", "회원가입 실패");
