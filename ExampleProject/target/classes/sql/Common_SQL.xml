@@ -14,4 +14,24 @@
 		WHERE id = #{id} AND pwd = #{pwd}
 	</select>
 	
+<!--  	<select id="joinCheck" parameterType="hashMap" resultType="hashmap">
+		SELECT * FROM customer_manage
+	</select> -->
+
+
+	<insert id="joinCheck" parameterType="hashMap" >
+		insert into customer_manage (id, pwd, name, addr, addr2, addr3, contact, email, sex, birth)
+			values(
+					#{id},
+					#{pwd},
+					#{name},
+					#{addr},
+					#{addr2},
+					#{addr3},
+					#{contact},
+					#{email},
+					#{sex},
+					#{birth}
+				)
+	</insert>			
 </mapper>

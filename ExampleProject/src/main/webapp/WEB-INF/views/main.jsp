@@ -20,7 +20,13 @@
         <header class="header_top">
             <span class="left_menu"><a href="#">문의장소</a></span>
             <span class="right_menu">
+            	<c:if test="${userInfo == null }">
                 <a href="login.do">로그인</a>
+                </c:if>
+                <c:if test="${userInfo != null}">
+                <a>${userInfo.name}님 환영합니다.</a>
+                <a href="logout.do">로그아웃</a>
+                </c:if>
                 <a href="mypage.do">마이페이지</a>
          	    <a href="#">장바구니</a>
                 <a href="#">Q&A</a></span>
