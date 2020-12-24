@@ -114,21 +114,13 @@ public class HomeController {
 		}
 		return mv;
 	} */
-	/*@RequestMapping(value = "logout.do", method = RequestMethod.GET)
-	public ModelAndView logout(@RequestParam Map<String, Object> map, HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView("redirect:/");
-		Map<String, Object> userLogout = commonService.logout(map); 
-		return mv;
-	}*/
+
 	@RequestMapping("logout.do")
-	public ModelAndView logout(HttpSession session) {
-		
-		commonService.logout(session);
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:index.do");
-		mv.addObject("msg", "logout");
-		
-		return mv;
+	public ModelAndView logout(HttpServletRequest req) {
+		HttpSession s = req.getSession();
+		if(s.getAttribute("userInfo") != null)
+			s.invalidate();
+		return new ModelAndView("redirect:/");
 	}
 	
 	//여기에 받아오는 MAP은 사용자가 JSP에서 입력한 값을 받아오는 MAP key value

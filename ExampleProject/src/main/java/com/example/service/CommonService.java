@@ -25,15 +25,8 @@ public class CommonService {
 	{ 
 		return commonDAO.loginCheck(map);} //회원 로그인 체크
 	
-	/*public Map<String, Object > logout(Map<String, Object> map)
-	{ 
-		return commonDAO.logout(map);} //회원 로그아웃*/
-
 	public int joinCheck(Map<String, Object> map)
 	{ 
 		return commonDAO.joinCheck(map);}
 
-	public void logout(HttpSession session) {
-		session.invalidate();
-	}
 }
