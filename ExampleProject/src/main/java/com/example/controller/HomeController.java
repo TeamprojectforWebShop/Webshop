@@ -41,7 +41,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("/main");
 				
-		List<Map<String, Object>> list = commonService.getList(null);
+		List<Map<String, Object>> list = commonService.search(null);
 		mv.addObject("list", list);
 		return mv;
 	}
@@ -53,7 +53,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("/login");
 				
-		List<Map<String, Object>> list = commonService.getList(null);
+		List<Map<String, Object>> list = commonService.search(null);
 		mv.addObject("list", list);
 		mv.addObject("map", map);
 		return mv;
@@ -65,7 +65,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("/mypage");
 				
-		List<Map<String, Object>> list = commonService.getList(null);
+		List<Map<String, Object>> list = commonService.search(null);
 		mv.addObject("list", list);
 		return mv;
 	}
@@ -76,9 +76,24 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("/join");
 				
-		List<Map<String, Object>> list = commonService.getList(null);
+		List<Map<String, Object>> list = commonService.search(null);
 		mv.addObject("list", list);
 		mv.addObject("map", map);
+		return mv;
+	}
+	
+	@RequestMapping(value = "search.do", method = RequestMethod.GET)
+	public ModelAndView search(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+		log.debug("Request Parameter : " + map);
+		ModelAndView mv = new ModelAndView("/search");
+		
+		List<Map<String, Object>> list = null;
+		list = commonService.search(map);
+		
+		log.debug("search SQL result : "+list);
+		
+		mv.addObject("list", list);
+		
 		return mv;
 	}
 	
@@ -88,7 +103,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("/product");
 				
-		List<Map<String, Object>> list = commonService.getList(null);
+		List<Map<String, Object>> list = commonService.search(map);
 		mv.addObject("list", list);
 		return mv;
 	}
@@ -160,8 +175,7 @@ public class HomeController {
 	            mv.addObject("msg", "회원가입 실패");
 	         }
 	      return mv;
-		
-		
 	}
+		
 
 }

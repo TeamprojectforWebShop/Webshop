@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 response.setHeader("Pragma", "no-cache");
 response.setHeader("Cache-Control", "no-cache");
 response.setHeader("Cache-Control", "no-store");
-response.setDateHeader("Expires", 0L);
-%> <!-- 뒤로가기 캐시 삭제 -->
+response.setDateHeader("Expires", 0L); %> <!-- 뒤로가기 캐시 삭제 -->
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,11 +15,11 @@ response.setDateHeader("Expires", 0L);
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <script src="/JavaScript/main.js"></script>
 </head>
-
 <body>
 	<c:if test="${map.msg ne null }">
 		<!-- 메세지 온게 있으면 alert으로 출력하는거 -->
 		<script>
+			
 			alert('${map.msg}');
 		</script>
 	</c:if>
@@ -42,7 +40,7 @@ response.setDateHeader("Expires", 0L);
 
 		<nav class="header_bottom">
 			<ul class="main_menu">
-				<li><a href="#">할인품목!</a></li>
+				<li><a href="#">할인품목</a></li>
 				<li><a href="#">메인메뉴1_서브확인</a>
 					<ul class="sub_menu">
 						<li><a href="product_ex.do">서브메뉴1확인</a></li>
@@ -69,10 +67,9 @@ response.setDateHeader("Expires", 0L);
 					</ul></li>
 			</ul>
 
-			<form class="search_bar" action="#" method="GET">
-				<input type="text" name="search" placeholder="검색하세요"
-					class="search_input"> <input type="button" name="submit"
-					value="검색" class="search_submit">
+			<form class="search_bar" action="search.do" method="GET">
+				<input type="text" name="search" placeholder="검색하세요" class="search_input">
+				<input type="submit" name="submit" value="검색" class="search_submit">
 			</form>
 
 		</nav>
@@ -161,7 +158,6 @@ response.setDateHeader("Expires", 0L);
 				</div>
 			</section>
 		</div>
-
 		<div class="list">
 			<h2>베스트</h2>
 			<section class="main_section1">

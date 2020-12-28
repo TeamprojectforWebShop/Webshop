@@ -3,8 +3,10 @@
 
 <mapper namespace="common">
 
-	<select id="getList" parameterType="hashMap" resultType="hashmap">
-		SELECT * FROM product_manage
+	<select id="search" parameterType="hashMap" resultType="hashmap">
+		SELECT *
+		FROM test_goods
+		WHERE product_name LIKE concat('%',#{search},'%')
 	</select>
 	
 	
@@ -33,5 +35,6 @@
 					#{sex},
 					#{birth}
 				)
-	</insert>			
+	</insert>	
+		
 </mapper>

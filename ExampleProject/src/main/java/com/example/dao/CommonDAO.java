@@ -15,8 +15,8 @@ public class CommonDAO extends AbstractDAO {
 	Logger log = Logger.getLogger(this.getClass());
 	
 	//unchecked : 검증되지 않은 연산자 관련 경고 억제
-	public List<Map<String, Object>> getList(Map<String, Object> map) {
-		return (List<Map<String, Object>>)selectList("common.getList", map);} 
+	public List<Map<String, Object>> search(Map<String, Object> map) {
+		return (List<Map<String, Object>>)selectList("common.search", map);} 
 	//common.getList의 common은 common_sql의 mapper namespace="common"
 	
 	public Map<String, Object> loginCheck(Map<String, Object> map) { //회원 로그인 체크
@@ -24,5 +24,6 @@ public class CommonDAO extends AbstractDAO {
 
 	public int joinCheck(Map<String, Object> map) {
 		return (Integer) insert("common.joinCheck", map);} 
+	
 	
 }

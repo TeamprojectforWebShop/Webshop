@@ -17,9 +17,9 @@ public class CommonService {
 	@Resource(name="commonDAO")
 	private CommonDAO commonDAO;
 	
-	public List<Map<String, Object >> getList(Map<String, Object> map)
+	public List<Map<String, Object >> search(Map<String, Object> map)
 	{ 
-		return commonDAO.getList(map);}
+		return commonDAO.search(map);}
 
 	public Map<String, Object > loginCheck(Map<String, Object> map)
 	{ 
