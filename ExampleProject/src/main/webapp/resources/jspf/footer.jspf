@@ -1,0 +1,33 @@
+<%@page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script>console.log('footer.jspf');</script>
+<body>
+<div id="helper">
+		<a href="#" class="up"><p>↑</p></a> <a href=""><p>■</p></a> <a
+			href="#down_test" class="down"><p>↓</p></a>
+	</div>
+
+	<hr>
+
+	<footer>
+		<div id="down_test"></div>
+		<div id="address_box">
+
+			<div class="address1">
+				고객전화<br> 1234-5678<br> 월~금 : am 06:00 ~ am 09:00<br>
+				주말안함<br> 내용없음<br> 할말없음
+			</div>
+			<div class="address2">
+				무통장입금<br> 우리 156789-15156-8789<br> 농협 125486-1287-516897<br>
+				국민 154-1548923-1549412<br> 신한 12454-1189-1541899<br> 예금주 :
+				아무개<br>
+			</div>
+			<div class="address3">
+				회사정보<br> (주) 회사<br> 대표 : 아무개<br> 사업자 등록 번호 :
+				130-86-56658<br> E-mail : dkanro@dkanro.net<br> 주소 : 주소를
+				입력<br>
+			</div>
+		</div>
+	</footer>
+</body>

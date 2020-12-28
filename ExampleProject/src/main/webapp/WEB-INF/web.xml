@@ -38,9 +38,9 @@
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
-			<include-prelude>/resources/jspf/prelude_header.jspf
+			<include-prelude>/resources/jspf/header.jspf
 			</include-prelude>
-			<include-coda>/resources/jspf/coda_footer.jspf</include-coda>
+			<include-coda>/resources/jspf/footer.jspf</include-coda>
 		</jsp-property-group>
 	</jsp-config>
 
