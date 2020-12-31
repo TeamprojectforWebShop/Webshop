@@ -6,8 +6,36 @@
 	
 <!-- select	 -->
 
+	<!-- 제품 상세페이지 문장 -->
+	<select id="detailPage" parameterType="hashMap" resultType="hashMap">
+		SELECT * 
+		FROM test_goods
+		where product_code = #{product_code}
+	</select>
+	
+	<!-- 제품 리스트 문장 -->
 	<select id="getList" parameterType="hashMap" resultType="hashmap">
-		SELECT * FROM product_manage
+		SELECT *
+		FROM test_goods
+	</select>
+	
+	<!-- 장바구니 -->
+	<insert id="cart" parameterType="hashMap">
+		insert into ${table} (id, product_code, size, color_name, count, price)
+		values(
+			#{id},
+			#{product_code},
+			#{size},
+			#{color_name},
+			#{count},
+			#{price}
+		)
+	</insert>
+	
+	<!-- 구매페이지 미구현 -->
+	<select id="pay" parameterType="hashMap" resultType="hashmap">
+		select *
+		from test_cart
 	</select>
 	
 	<select id="search" parameterType="hashMap" resultType="hashmap">

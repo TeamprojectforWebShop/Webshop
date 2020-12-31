@@ -35,14 +35,22 @@ public class HomeController {
 	CommonService commonService = new CommonService();
 
 	
+	/*
+	 * 메인페이지
+	 */
+
 	@RequestMapping(value = { "/", "/index.do" }, method = RequestMethod.GET)
 	public ModelAndView home(@RequestParam Map<String, Object> map) {
-	
 		log.debug("Request Parameter : " + map);
 		
 		ModelAndView mv = new ModelAndView("/main");
+				
+		List<Map<String, Object>> list = commonService.getList(null);
+		mv.addObject("list", list);
+		mv.addObject("map", map);
 		
-		mv.addObject("map", map);		
+		System.out.println("list출력" + list);
+		System.out.println("map출력" + map);
 		
 		return mv;
 	}
@@ -140,15 +148,59 @@ public class HomeController {
 		return mv;
 	}
 
-	@RequestMapping(value = { "product_ex" }, method = RequestMethod.GET)
-	public ModelAndView product(@RequestParam Map<String, Object> map) {
-		
+	/*
+	 * 제품 상세페이지
+	 * String product_code는 where절에 넣기 위해서 생성
+	 */
+	@RequestMapping(value = { "product_detail.do" }, method = RequestMethod.GET)
+	public ModelAndView product(@RequestParam Map<String, Object> map,
+		@RequestParam("product_code") String product_code) {
 		log.debug("Request Parameter : " + map);
-
-		ModelAndView mv = new ModelAndView("/product");
-
-		List<Map<String, Object>> list = commonService.search(map);
-		mv.addObject("list", list);
+		
+		ModelAndView mv = new ModelAndView("/product_detail");
+				
+		System.out.println("test" + product_code);
+		
+		List<Map<String, Object>> get = commonService.detailPage(map);
+		mv.addObject("get", get);
+		mv.addObject("map",map);
+		
+		System.out.println("list출력" + get);
+		System.out.println("map출력" + map);
+		
+		return mv;
+	}
+	
+	/*
+	 * 장바구니
+	 */
+	@RequestMapping(value = "cart.do", method = RequestMethod.POST)
+	public ModelAndView cart(@RequestParam Map<String, Object> map) {
+		log.debug("Request Parameter : " + map);
+		ModelAndView mv = new ModelAndView("/product_detail");
+		
+		List<Map<String, Object>> cart = commonService.cart(map);
+		mv.addObject("map", map);
+		
+		System.out.println("cart출력" + cart);
+		System.out.println("map출력" + map);
+		
+		return mv;
+	}
+	
+	/*
+	 * 구매페이지 (미구현)
+	 */
+	@RequestMapping(value = "product_pay", method = RequestMethod.POST)
+	public ModelAndView pay(@RequestParam Map<String, Object> map) {
+		log.debug("Request Parameter : " + map);
+		ModelAndView mv = new ModelAndView("/product_pay");
+		
+		List<Map<String, Object>> pay = commonService.pay(null);
+		mv.addObject("map", map);
+		
+		System.out.println("pay출력" + pay);
+		System.out.println("map출력"+ map);
 		
 		return mv;
 	}

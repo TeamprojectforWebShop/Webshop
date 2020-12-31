@@ -30,12 +30,12 @@
 				${row.product_code}
 			</td>
 			<td>
-				<a href="${path}/WEB-INF/views/product_detail/${row.product_code}"> <!-- 클릭시 상품 상세정보로 이동 -->
-				<img src="${path}/resources/image/t1.jpg" width="120px" height="110px"> 
+				<a href="prodcut_detail.do?prodcut_code=${row.product_code}"> <!-- 클릭시 상품 상세정보로 이동 -->
+				<img src="resources/image/${row.product_code}.jpg" width="120px" height="110px"> 
 				</a>
 			</td>
 			<td align="center">
-				<a href="${path}/shop/product/detail/${row.product_name}">${row.product_name}</a><br>
+				<a href="product_detail.do?product_code=${row.product_code}">${row.product_name}</a><br>
 				<c:if test="${sessionScope.adminId != null }">
 					<a href="${path}/shop/product/edit/${row.productId}">[상품편집]</a>
 					</c:if>
