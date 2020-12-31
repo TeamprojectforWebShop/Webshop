@@ -3,10 +3,17 @@
 
 <mapper namespace="common">
 
+	
+<!-- select	 -->
+
+	<select id="getList" parameterType="hashMap" resultType="hashmap">
+		SELECT * FROM product_manage
+	</select>
+	
 	<select id="search" parameterType="hashMap" resultType="hashmap">
 		SELECT *
 		FROM test_goods
-		WHERE product_name LIKE concat('%',#{search},'%')
+			WHERE product_name LIKE concat('%',#{search},'%')
 	</select>
 	
 	
@@ -16,13 +23,10 @@
 		WHERE id = #{id} AND pwd = #{pwd}
 	</select>
 	
-<!--  	<select id="joinCheck" parameterType="hashMap" resultType="hashmap">
-		SELECT * FROM customer_manage
-	</select> -->
-
+<!-- insert	 -->
 
 	<insert id="joinCheck" parameterType="hashMap" >
-		insert into customer_manage (id, pwd, name, addr, addr2, addr3, contact, email, sex, birth)
+		insert into customer_manage (id, pwd, name, addr, addr2, addr3, addr4, addr5, contact, email, sex, birth)
 			values(
 					#{id},
 					#{pwd},
@@ -30,11 +34,37 @@
 					#{addr},
 					#{addr2},
 					#{addr3},
+					#{addr4},
+					#{addr5},
 					#{contact},
 					#{email},
 					#{sex},
 					#{birth}
 				)
-	</insert>	
-		
+	</insert>
+	
+<!-- update	 -->
+	<update id="updateMember" parameterType="hashMap">
+	
+	update customer_manage
+	set
+		pwd = #{pwd},
+		name = #{name},
+		addr = #{addr},
+		addr2 = #{addr2},
+		addr3 = #{addr3},
+		addr4 = #{addr4},
+		addr5 = #{addr5},
+		contact = #{contact},
+		email = #{email}
+	where id = #{id}
+	
+	</update>
+	
+	
 </mapper>
+
+		
+<!--	<select id="selectMyoderGoodsList" parameterType="hashMap" resultType="hashMap">
+		상품 목록 저장한 테이블 넣기
+	</select> -->

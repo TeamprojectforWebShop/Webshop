@@ -17,9 +17,16 @@ public class CommonService {
 	@Resource(name="commonDAO")
 	private CommonDAO commonDAO;
 	
-	public List<Map<String, Object >> search(Map<String, Object> map)
+	public List<Map<String, Object >> getList(Map<String, Object> map)
 	{ 
-		return commonDAO.search(map);}
+		return commonDAO.getList(map);}
+
+	public List<Map<String, Object >> search(Map<String, Object> map){ 
+//		  if(map.get("search").toString().equals(""))
+//	            map.put("search", "");
+		  
+		return commonDAO.search(map);
+	}
 
 	public Map<String, Object > loginCheck(Map<String, Object> map)
 	{ 
@@ -28,5 +35,9 @@ public class CommonService {
 	public int joinCheck(Map<String, Object> map)
 	{ 
 		return commonDAO.joinCheck(map);}
+
+	//회원 정보 수정
+	public int updateMember(Map<String, Object> map){ return commonDAO.updateMember(map);}
+	
 
 }
