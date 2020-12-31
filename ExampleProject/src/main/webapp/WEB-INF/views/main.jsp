@@ -16,12 +16,12 @@ response.setDateHeader("Expires", 0L); %> <!-- 뒤로가기 캐시 삭제 -->
 <script src="resources/Js/main.js"></script>
 </head>
 <body>
-	<c:if test="${map.msg ne null }">
+		<c:if test="${map.msg ne null }">
 		<!-- 메세지 온게 있으면 alert으로 출력하는거 -->
-		<script>
+		<!--  <script>
 			
 			alert('${map.msg}');
-		</script>
+		</script>-->
 	</c:if>
 	<div id="main_content">
 

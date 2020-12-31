@@ -41,13 +41,13 @@
 						<div class="eheck_font" id="email_check"></div>
 					</div>
 					<label for="address">주소입력</label> <br>
-						<input type="text" id="postcode" placeholder="우편번호">
+						<input type="text" id="postcode" name="addr4" placeholder="우편번호">
 						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 						<input type="text" name="addr" id="addr" placeholder="도로명주소"><br>
 						<input type="text" name="addr3" id="addr3" placeholder="지번주소"><br>
 						<span id="guide" style="color: #999; display: none"></span>
 						<input type="text" name="addr2" id="addr2" placeholder="상세주소"><br> 
-						<input type="text" id="extraAddress" placeholder="참고항목">
+						<input type="text" id="extraAddress" name="addr5" placeholder="참고주소">
 					<div class="form-group">
 						<label for="contact">휴대폰번호</label> <br>
 							<input type="tel" class="form-control" id="contact" name="contact" placeholder="Phone Number">
@@ -470,7 +470,6 @@
 												extraRoadAddr = ' ('
 														+ extraRoadAddr + ')';
 											}
-
 											// 우편번호와 주소 정보를 해당 필드에 넣는다.
 											document.getElementById('postcode').value = data.zonecode;
 											document.getElementById("addr").value = roadAddr;
