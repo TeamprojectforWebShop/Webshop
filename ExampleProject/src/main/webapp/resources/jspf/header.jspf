@@ -32,7 +32,7 @@
 		<nav class="header_bottom">
 			<ul class="main_menu">
 				<li><a href="#">할인품목</a></li>
-				<li><a href="#">메인메뉴1_서브확인</a>
+				<li><a href="#">메인메뉴1</a>
 					<ul class="sub_menu">
 						<li><a href="product_ex.do">서브메뉴1확인</a></li>
 						<li><a href="#">서브메뉴2</a></li>

@@ -18,8 +18,6 @@ public class CommonService {
 	private CommonDAO commonDAO;
 
 	public List<Map<String, Object >> search(Map<String, Object> map){ 
-//		  if(map.get("search").toString().equals(""))
-//	            map.put("search", "");
 		  
 		return commonDAO.search(map);
 	}
@@ -35,7 +33,32 @@ public class CommonService {
 	//회원 정보 수정
 	public int updateMember(Map<String, Object> map){ return commonDAO.updateMember(map);}
 	
-
+	//관리자 유저목록 페이지
+	public List<Map<String, Object>> userList(Map<String, Object> map) 
+	{ 
+		return commonDAO.userList(map);} 
+	
+	public int insertUser(Map<String, Object> map)
+	{ 
+		return commonDAO.insertUser(map);} 
+	
+	public int updateUser(Map<String, Object> map)
+	{ 
+		return commonDAO.updateUser(map);} 
+	
+	public int deleteUser(Map<String, Object> map)
+	{ 
+		return commonDAO.deleteUser(map);} 
+	
+	//관리자 물품목록
+	public List<Map<String, Object>> productList(Map<String, Object> map) 
+	{ 
+		return commonDAO.productList(map);} 
+	
+	//관리자 주문목록
+	public List<Map<String, Object>> orderList(Map<String, Object> map) 
+	{ 
+		return commonDAO.orderList(map);} 
 	/*
 	 * 제품 상세보기
 	 */

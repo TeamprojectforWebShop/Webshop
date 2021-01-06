@@ -30,7 +30,7 @@
                 <li><a href="#">할인품목!</a></li>
                 <li><a href="#">메인메뉴1_서브확인</a>
                     <ul class="sub_menu">
-                        <li><a href="product_ext1.html">서브메뉴1확인</a></li>
+                        <li><a href="product_ext1.html">서브메뉴1</a></li>
                         <li><a href="#">서브메뉴2</a></li>
                         <li><a href="#">서브메뉴3</a></li>
                     </ul>

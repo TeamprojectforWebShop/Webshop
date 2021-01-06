@@ -1,15 +1,9 @@
 package com.example.controller;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -22,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.common.CommandMap;
 import com.example.service.CommonService;
 
 @Controller
@@ -73,11 +66,52 @@ public class HomeController {
 		log.debug("Request Parameter : " + map);
 		
 		ModelAndView mv = new ModelAndView("/manage");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "userList.do", method = RequestMethod.GET)
+	public ModelAndView userList(@RequestParam Map<String, Object> map) {
+
+		log.debug("Request Parameter : " + map);
 		
-		List<Map<String, Object>> list = commonService.search(null);
+		ModelAndView mv = new ModelAndView("/userList");
 		
+		List<Map<String, Object>> list = commonService.userList(map);
+		          
+		log.debug("search SQL result : " + list);
 		mv.addObject("list", list);
-		mv.addObject("map", map);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
+	public ModelAndView productList(@RequestParam Map<String, Object> map) {
+
+		log.debug("Request Parameter : " + map);
+		
+		ModelAndView mv = new ModelAndView("/productList");
+		
+		List<Map<String, Object>> list = commonService.productList(map);
+		          
+		log.debug("search SQL result : " + list);
+		mv.addObject("list", list);
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "orderList.do", method = RequestMethod.GET)
+	public ModelAndView orderList(@RequestParam Map<String, Object> map) {
+
+		log.debug("Request Parameter : " + map);
+		
+		ModelAndView mv = new ModelAndView("/orderList");
+		
+		List<Map<String, Object>> list = commonService.orderList(map);
+		          
+		log.debug("search SQL result : " + list);
+		mv.addObject("list", list);
 		
 		return mv;
 	}
@@ -122,11 +156,6 @@ public class HomeController {
 		log.debug("Request Parameter : " + map);
 		
 		ModelAndView mv = new ModelAndView("/join");
-		
-		List<Map<String, Object>> list = commonService.search(null);
-		
-		mv.addObject("list", list);
-		mv.addObject("map", map);
 		
 		return mv;
 	}
@@ -235,8 +264,9 @@ public class HomeController {
 			s.setMaxInactiveInterval(30*60); //세션 시간
 			mv.addObject("msg", "로그인 성공"); //성공 확인
 		} else {
+			mv.addObject("msg", "아이디 및 비밀번호를 다시 확인해주세요."); // 실패 확인
 			mv.setViewName("/login");
-			mv.addObject("msg", "로그인 실패"); // 실패 확인
+			
 		}
 		
 		return mv;

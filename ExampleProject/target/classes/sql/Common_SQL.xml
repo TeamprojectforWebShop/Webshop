@@ -51,6 +51,95 @@
 		WHERE id = #{id} AND pwd = #{pwd}
 	</select>
 	
+<!-- 관리자 페이지 유저 정보 -->		
+	<select id="userList" parameterType="hashMap" resultType="hashmap">
+		SELECT
+			 id
+			 , name
+			 , pwd
+			 , email
+			 , custRank
+			 , joinDate
+		FROM customer_manage		
+	<choose>
+		<when test="condition == 'id' and keyword != ('')">
+			WHERE id LIKE concat('%',#{keyword},'%')
+		</when>					
+		<when test="condition == 'name' and keyword != ('')">
+			WHERE name LIKE concat('%',#{keyword},'%')  
+		</when>
+		<when test="condition == 'custRank' and keyword !=('')">
+			WHERE custRank LIKE concat('%',#{keyword},'%')
+		</when>
+	</choose>
+	</select>
+	
+	<insert id="insertUser" parameterType="hashMap" >
+		insert into customer_manage (id, name, pwd, email, joinDate)
+		values(
+				#{id}
+				, #{name}
+				, #{pwd}
+				, #{email},
+				, CURRENT_TIMESTAMP
+				)
+	</insert>
+	
+	<update id="updateUser" parameterType="hashMap" >
+		UPDATE customer_manage SET
+
+				NAME = #{name}
+				, PWD = #{pwd}
+				, EMAIL = #{email}
+				, custRank = #{custRank},
+		WHERE 
+				ID = #{id}
+				)
+	</update>
+	
+	<delete id="deleteUser" parameterType="hashMap">
+	DELETE FROM customer_manage
+	WHERE ID = #{id}
+	</delete>
+	
+<!-- 관리자 페이지 물품목록 -->		
+	<select id="productList" parameterType="hashMap" resultType="hashmap">
+		SELECT *
+		FROM test_goods
+		<choose>
+			<when test="condition == 'product_name' and keyword != ('')">
+				WHERE product_name LIKE concat('%',#{keyword},'%')
+			</when>					
+			<when test="condition == 'product_code' and keyword != ('')">
+				WHERE product_code LIKE concat('%',#{keyword},'%')  
+			</when>
+			<when test="condition == 'color_name' and keyword !=('')">
+				WHERE color_name LIKE concat('%',#{keyword},'%')
+			</when>
+			<when test="condition == 'gender' and keyword !=('')">
+				WHERE gender LIKE concat('%',#{keyword},'%')
+			</when>
+		</choose>
+	</select>
+	
+<!-- 관리자 페이지 주문목록 -->		
+
+	<select id="orderList" parameterType="hashMap" resultType="hashmap">
+		SELECT *
+		FROM order_manage
+	<choose>
+		<when test="condition == 'custId' and keyword != ('')">
+			WHERE id LIKE custId('%',#{keyword},'%')
+		</when>					
+		<when test="condition == 'shipStat' and keyword != ('')">
+			WHERE shipStat LIKE concat('%',#{keyword},'%')  
+		</when>
+		<when test="condition == 'orderNo' and keyword !=('')">
+			WHERE orderNo LIKE concat('%',#{keyword},'%')
+		</when>
+	</choose>
+	</select>
+
 <!-- insert	 -->
 
 	<insert id="joinCheck" parameterType="hashMap" >
@@ -74,18 +163,18 @@
 <!-- update	 -->
 	<update id="updateMember" parameterType="hashMap">
 	
-	update customer_manage
-	set
-		pwd = #{pwd},
-		name = #{name},
-		addr = #{addr},
-		addr2 = #{addr2},
-		addr3 = #{addr3},
-		addr4 = #{addr4},
-		addr5 = #{addr5},
-		contact = #{contact},
-		email = #{email}
-	where id = #{id}
+		update customer_manage
+		set
+			pwd = #{pwd},
+			name = #{name},
+			addr = #{addr},
+			addr2 = #{addr2},
+			addr3 = #{addr3},
+			addr4 = #{addr4},
+			addr5 = #{addr5},
+			contact = #{contact},
+			email = #{email}
+		where id = #{id}
 	
 	</update>
 	
