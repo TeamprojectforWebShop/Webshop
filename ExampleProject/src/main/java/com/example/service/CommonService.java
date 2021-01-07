@@ -1,10 +1,7 @@
 package com.example.service;
 
 import java.util.*;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -48,15 +45,11 @@ public class CommonService {
 	{ 
 		return commonDAO.userList(map);} 
 	
-	public int insertUser(Map<String, Object> map)
-	{ 
-		return commonDAO.insertUser(map);} 
-	
-	public int updateUser(Map<String, Object> map)
+	public Map<String, Object> updateUser(Map<String, Object> map)
 	{ 
 		return commonDAO.updateUser(map);} 
 	
-	public int deleteUser(Map<String, Object> map)
+	public Map<String, Object> deleteUser(Map<String, Object> map)
 	{ 
 		return commonDAO.deleteUser(map);} 
 	

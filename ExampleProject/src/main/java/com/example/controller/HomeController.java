@@ -130,6 +130,28 @@ public class HomeController {
 		return mv;
 	}
 	
+	  @RequestMapping(value = "/listUpdate.do", method = RequestMethod.GET)
+	   public ModelAndView listUpdate(@RequestParam Map<String, Object> map) {
+	      ModelAndView mv = new ModelAndView("/userList");
+	      
+	    Map<String, Object> list = commonService.updateUser(map);
+	    mv.addObject("list", list);
+	    mv.addObject("msg", "수정을 완료하였습니다.");
+	    
+	      return mv;
+	   }
+	  
+	  @RequestMapping(value = "/listDelete.do", method = RequestMethod.GET)
+	   public ModelAndView listDelete(@RequestParam Map<String, Object> map) {
+	      ModelAndView mv = new ModelAndView("/userList");
+	      
+	    Map<String, Object> list = commonService.deleteUser(map);
+	    mv.addObject("list", list);
+	    mv.addObject("msg", "삭제를 완료하였습니다.");
+	    
+	      return mv;
+	   }
+	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
 	public ModelAndView productList(@RequestParam Map<String, Object> map) {
 

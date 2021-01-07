@@ -13,6 +13,7 @@
 					<col style="width: 25%;" />
 					<col style="width: 15%;" />
 					<col style="width: 15%;" />
+					<col style="width: 5%;" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -22,6 +23,7 @@
 						<th>EMAIL</th>
 						<th>유저등급</th>
 						<th>가입일</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,6 +42,7 @@
 									<td><c:out value="${list.email}" /></td>
 									<td><c:out value="${list.custRank}" /></td>
 									<td><c:out value="${list.joinDate}" /></td>
+									<td><a href="listDelete.do">삭제하기</a></td>
 								</tr>
 							</c:forEach>
 						</c:when>

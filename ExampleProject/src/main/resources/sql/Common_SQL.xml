@@ -91,17 +91,6 @@
 	</choose>
 	</select>
 	
-	<insert id="insertUser" parameterType="hashMap" >
-		insert into customer_manage (id, name, pwd, email, joinDate)
-		values(
-				#{id}
-				, #{name}
-				, #{pwd}
-				, #{email},
-				, CURRENT_TIMESTAMP
-				)
-	</insert>
-	
 	<update id="updateUser" parameterType="hashMap" >
 		UPDATE customer_manage SET
 
