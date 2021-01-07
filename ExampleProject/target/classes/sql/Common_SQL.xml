@@ -6,6 +6,12 @@
 	
 <!-- select	 -->
 
+	<!-- 아이디 중복체크 -->
+	 <select id="idcheck" parameterType="String" resultType="Integer">
+	    select count(*) from customer_manage 
+	    where id = #{id}
+	 </select>
+
 	<!-- 제품 상세페이지 문장 -->
 	<select id="detailPage" parameterType="hashMap" resultType="hashMap">
 		SELECT * 
@@ -31,6 +37,17 @@
 			#{price}
 		)
 	</insert>
+	
+	<!-- 게시판 -->
+   <insert id="boardwrite" parameterType="hashMap">
+      insert into board_manage( title, content, writer)
+      VALUES(
+            #{title}, 
+            #{content}, 
+            #{writer}
+      )
+
+   </insert>
 	
 	<!-- 구매페이지 미구현 -->
 	<select id="pay" parameterType="hashMap" resultType="hashmap">

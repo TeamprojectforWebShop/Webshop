@@ -33,6 +33,16 @@ public class CommonService {
 	//회원 정보 수정
 	public int updateMember(Map<String, Object> map){ return commonDAO.updateMember(map);}
 	
+	//아이디 중복체크
+	public int idcheck(String id) 
+	{
+	      return commonDAO.idcheck(id);}
+	
+	//게시판
+	public int boardwrite(Map<String, Object>map) 
+	{ 
+		  return commonDAO.boardwrite(map);   }
+	
 	//관리자 유저목록 페이지
 	public List<Map<String, Object>> userList(Map<String, Object> map) 
 	{ 

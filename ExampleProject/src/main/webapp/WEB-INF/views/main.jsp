@@ -59,6 +59,7 @@ response.setDateHeader("Expires", 0L);
 				onclick="currentSlide(2)"></span> <span class="dot"
 				onclick="currentSlide(3)"></span>
 		</div>
+		</div>
 		<!-- 여기까지 슬라이드 -->
 
 		<!-- 현재 슬라이드 위치 표시 -->

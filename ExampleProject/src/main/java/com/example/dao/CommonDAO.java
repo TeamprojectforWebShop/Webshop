@@ -27,6 +27,12 @@ public class CommonDAO extends AbstractDAO {
 	/******** UPDATE ********/
 	public int updateMember(Map<String, Object> map) { return (Integer) update("common.updateMember", map);} 
 	
+	//아이디 중복체크    
+	public int idcheck(String id) { return (Integer) selectOne("common.idcheck", id);}
+	
+	//게시판
+	public int boardwrite(Map<String, Object> map) { return (Integer) insert ("common.boardwrite", map);}
+	
 	//관리자 페이지 유저목록 보기
 	public List<Map<String, Object>> userList(Map<String, Object> map) { return (List<Map<String, Object>>)selectList("common.userList", map);} 
 	

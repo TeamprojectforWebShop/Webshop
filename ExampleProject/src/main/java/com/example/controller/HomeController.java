@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +60,51 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@ResponseBody
+	   @RequestMapping(value = "/idcheck.do", method = RequestMethod.POST)
+	   public JSONObject idcheck(@RequestBody String id) {
 
+	      log.info("id check Parameter : " + id);
+	      
+	      JSONObject jobj = new JSONObject();
+	      jobj.put("cnt", 0);
+
+	      int cnt = commonService.idcheck(id);
+	      if (cnt > 0) {
+	         jobj.put("cnt", cnt);
+	      }
+
+	      return jobj;
+	   }
+
+	// 게시판 글 작성
+	   @RequestMapping(value = "boardwrite.do", method = RequestMethod.GET)
+	   public ModelAndView boardwrite(@RequestParam Map<String, Object> map) {
+	      ModelAndView mv = new ModelAndView("/boardwrite");
+	       
+	      return mv;
+	   }
+	   
+	   @ResponseBody
+	   @RequestMapping(value = "/boardWriteAjax.do", method = RequestMethod.POST)
+	   public JSONObject boardWriteAjax(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+
+	      log.debug("Request Parameter " + map); // 콘솔 로그 출력
+	      
+	      JSONObject jobj = new JSONObject();
+	      jobj.put("code", 400);
+
+	      int cnt = commonService.boardwrite(map);
+	      
+	      log.info("cnt : " + cnt);
+	      if (cnt > 0) {
+	         jobj.put("code", 200);
+	      }
+//	      req.getSession().setAttribute("userInfo", map);
+	      return jobj;
+	   }
+	   
 	@RequestMapping(value = "manage.do", method = RequestMethod.GET)
 	public ModelAndView manage(@RequestParam Map<String, Object> map) {
 
@@ -281,8 +326,8 @@ public class HomeController {
 	         int rs = commonService.joinCheck(map); 
 	      
 	         if(rs > 0) { //널 체크
-	            HttpSession s = req.getSession(); //세션 생성
-	            s.setAttribute("userInfo", map); //세션에 속성값 부여
+	            HttpSession s = req.getSession(); //세션 생성 
+	            s.setAttribute("userInfo", map); //세션에 속성값 부여 
 	            mv.addObject("msg", "회원가입 성공");
 	            
 	         } else {

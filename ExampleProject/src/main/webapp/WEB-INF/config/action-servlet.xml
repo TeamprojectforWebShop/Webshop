@@ -41,6 +41,8 @@
             <mvc:exclude-mapping path="/index.do"/> <!-- 로그인 없어도 되어야하는 주소를 적어줌 -->
             <mvc:exclude-mapping path="/login.do"/>
             <mvc:exclude-mapping path="/main.do"/>
+            <mvc:exclude-mapping path="/idcheck.do"/>
+            <mvc:exclude-mapping path="/joinCheck.do" />
             <!-- Return Objects Method -->
             <mvc:exclude-mapping path="/loginCheck.do"/>
             <!-- Test -->

@@ -5,7 +5,7 @@
 	
 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://52.14.36.21:3306/shop_db?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;autoReconnect=true" />
+		<property name="url" value="jdbc:mysql://3.133.81.172:3306/shop_db?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;autoReconnect=true" />
 		<property name="username" value="im_user" /> 
 		<property name="password" value="cloth" />
 	</bean>

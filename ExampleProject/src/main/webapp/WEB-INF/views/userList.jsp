@@ -46,6 +46,7 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<button type="submit">수정하기</button>
 		</div>
 			<form action="userList.do" method="get">
 		<label for="condition">검색조건</label>

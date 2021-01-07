@@ -22,7 +22,9 @@
 				<c:if test="${userInfo.custRank == 1}">
 					<a href="manage.do">관리자 화면</a>
 				</c:if>
-				 <a href="mypage.do">마이페이지</a> <a href="#">장바구니</a> <a href="#">Q&A</a></span>
+				 <a href="mypage.do">마이페이지</a>
+				 <a href="#">장바구니</a>
+				 <a href="boardwrite.do">Q&A</a></span>
 		</header>
 
 		<header class="header_middle">
