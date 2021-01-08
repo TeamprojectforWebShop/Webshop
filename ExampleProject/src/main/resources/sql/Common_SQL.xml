@@ -94,18 +94,18 @@
 	<update id="updateUser" parameterType="hashMap" >
 		UPDATE customer_manage SET
 
-				NAME = #{name}
-				, PWD = #{pwd}
-				, EMAIL = #{email}
+				name = #{name}
+				, pwd = #{pwd}
+				, email = #{email}
 				, custRank = #{custRank},
 		WHERE 
-				ID = #{id}
+				id = #{id}
 				)
 	</update>
 	
 	<delete id="deleteUser" parameterType="hashMap">
 	DELETE FROM customer_manage
-	WHERE ID = #{id}
+	WHERE id = #{id}
 	</delete>
 	
 <!-- 관리자 페이지 물품목록 -->		

@@ -49,7 +49,7 @@ public class CommonService {
 	{ 
 		return commonDAO.updateUser(map);} 
 	
-	public Map<String, Object> deleteUser(Map<String, Object> map)
+	public int deleteUser(Map<String, Object> map)
 	{ 
 		return commonDAO.deleteUser(map);} 
 	

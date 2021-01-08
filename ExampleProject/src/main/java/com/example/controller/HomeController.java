@@ -142,14 +142,23 @@ public class HomeController {
 	   }
 	  
 	  @RequestMapping(value = "/listDelete.do", method = RequestMethod.GET)
-	   public ModelAndView listDelete(@RequestParam Map<String, Object> map) {
+	   public ModelAndView listDelete(@RequestParam Map<String, Object> map,  HttpServletRequest req ) {
+		  log.info("listDelete.do RequestParam : " + map);
 	      ModelAndView mv = new ModelAndView("/userList");
 	      
-	    Map<String, Object> list = commonService.deleteUser(map);
-	    mv.addObject("list", list);
-	    mv.addObject("msg", "삭제를 완료하였습니다.");
-	    
-	      return mv;
+	    int rs = commonService.deleteUser(map);
+	    if(rs > 0) { //널 체크
+            HttpSession s = req.getSession(); //세션 생성 
+            s.setAttribute("userInfo", map); //세션에 속성값 부여 
+            mv.addObject("msg", "삭제를 완료하였습니다.");
+	    }else {
+			mv.addObject("msg", "삭제 실패. 다시 시도하세요.");
+		}
+
+	    List<Map<String, Object>> list = commonService.userList(null);
+		mv.addObject("list", list);
+
+	    return mv;
 	   }
 	
 	@RequestMapping(value = "productList.do", method = RequestMethod.GET)
