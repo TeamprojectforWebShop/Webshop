@@ -129,17 +129,25 @@ public class HomeController {
 		
 		return mv;
 	}
+
 	
-	  @RequestMapping(value = "/listUpdate.do", method = RequestMethod.GET)
-	   public ModelAndView listUpdate(@RequestParam Map<String, Object> map) {
-	      ModelAndView mv = new ModelAndView("/userList");
-	      
-	    Map<String, Object> list = commonService.updateUser(map);
-	    mv.addObject("list", list);
-	    mv.addObject("msg", "수정을 완료하였습니다.");
-	    
-	      return mv;
-	   }
+	@RequestMapping(value="/modUserList.do", method=RequestMethod.POST)
+	public ModelAndView modUserList(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+		
+		ModelAndView mv = new ModelAndView("/userList");
+		
+		log.info("modUserList map : "+ map);
+		
+		int rs = commonService.updateUser(map);
+		
+		log.info("modUserList rs : " + rs);
+		mv.addObject("rs", rs);
+		
+	    List<Map<String, Object>> list = commonService.userList(null);
+		mv.addObject("list", list);
+		
+		return mv;
+	}
 	  
 	  @RequestMapping(value = "/listDelete.do", method = RequestMethod.GET)
 	   public ModelAndView listDelete(@RequestParam Map<String, Object> map,  HttpServletRequest req ) {
@@ -147,13 +155,7 @@ public class HomeController {
 	      ModelAndView mv = new ModelAndView("/userList");
 	      
 	    int rs = commonService.deleteUser(map);
-	    if(rs > 0) { //널 체크
-            HttpSession s = req.getSession(); //세션 생성 
-            s.setAttribute("userInfo", map); //세션에 속성값 부여 
-            mv.addObject("msg", "삭제를 완료하였습니다.");
-	    }else {
-			mv.addObject("msg", "삭제 실패. 다시 시도하세요.");
-		}
+	    mv.addObject("rs", rs);
 
 	    List<Map<String, Object>> list = commonService.userList(null);
 		mv.addObject("list", list);
@@ -176,6 +178,19 @@ public class HomeController {
 		return mv;
 	}
 	
+	  @RequestMapping(value = "prodListDelete.do", method = RequestMethod.GET)
+	   public ModelAndView prodListDelete(@RequestParam Map<String, Object> map,  HttpServletRequest req ) {
+		  log.info("prodListDelete.do RequestParam : " + map);
+	      ModelAndView mv = new ModelAndView("/productList");
+	      
+	    int rs = commonService.deleteProduct(map);
+	    mv.addObject("rs", rs);
+
+	    List<Map<String, Object>> list = commonService.productList(null);
+		mv.addObject("list", list);
+
+	    return mv;
+	   }
 	
 	@RequestMapping(value = "orderList.do", method = RequestMethod.GET)
 	public ModelAndView orderList(@RequestParam Map<String, Object> map) {
@@ -191,6 +206,39 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value="/modOrderList.do", method=RequestMethod.POST)
+	public ModelAndView modOrderList(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+		
+		ModelAndView mv = new ModelAndView("/orderList");
+		
+		log.info("modOrderList map : "+ map);
+		
+		int rs = commonService.updateOrder(map);
+		
+		log.info("modOrderList rs : " + rs);
+		mv.addObject("rs", rs);
+		
+	    List<Map<String, Object>> list = commonService.orderList(null);
+		mv.addObject("list", list);
+		
+		return mv;
+	}
+	  
+	
+	  @RequestMapping(value = "orderListDelete.do", method = RequestMethod.GET)
+	   public ModelAndView orderListDelete(@RequestParam Map<String, Object> map,  HttpServletRequest req ) {
+		  log.info("orderListDelete.do RequestParam : " + map);
+	      ModelAndView mv = new ModelAndView("/orderList");
+	      
+	    int rs = commonService.deleteOrder(map);
+	    mv.addObject("rs", rs);
+
+	    List<Map<String, Object>> list = commonService.orderList(null);
+		mv.addObject("list", list);
+
+	    return mv;
+	   }
 	
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
 	public ModelAndView mypage(@RequestParam Map<String, Object> map) throws Exception {

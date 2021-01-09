@@ -45,7 +45,7 @@ public class CommonService {
 	{ 
 		return commonDAO.userList(map);} 
 	
-	public Map<String, Object> updateUser(Map<String, Object> map)
+	public int updateUser(Map<String, Object> map)
 	{ 
 		return commonDAO.updateUser(map);} 
 	
@@ -58,10 +58,23 @@ public class CommonService {
 	{ 
 		return commonDAO.productList(map);} 
 	
+	public int deleteProduct(Map<String, Object> map)
+	{ 
+		return commonDAO.deleteProduct(map);} 
+	
 	//관리자 주문목록
 	public List<Map<String, Object>> orderList(Map<String, Object> map) 
 	{ 
 		return commonDAO.orderList(map);} 
+	
+	public int updateOrder(Map<String, Object> map)
+	{ 
+		return commonDAO.updateOrder(map);} 
+	
+	public int deleteOrder(Map<String, Object> map)
+	{ 
+		return commonDAO.deleteOrder(map);} 
+	
 	/*
 	 * 제품 상세보기
 	 */

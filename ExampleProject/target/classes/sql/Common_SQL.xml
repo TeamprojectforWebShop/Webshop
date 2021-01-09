@@ -92,24 +92,19 @@
 	</select>
 	
 	<update id="updateUser" parameterType="hashMap" >
-		UPDATE customer_manage SET
-
-				NAME = #{name}
-				, PWD = #{pwd}
-				, EMAIL = #{email}
-				, custRank = #{custRank},
-		WHERE 
-				ID = #{id}
-				)
+		UPDATE customer_manage
+		SET custRank = #{custRank}
+		WHERE id = #{id}
+				
 	</update>
 	
 	<delete id="deleteUser" parameterType="hashMap">
 	DELETE FROM customer_manage
-	WHERE ID = #{id}
+	WHERE id = #{id}
 	</delete>
 	
 <!-- 관리자 페이지 물품목록 -->		
-	<select id="productList" parameterType="hashMap" resultType="hashmap">
+	<!--  select id="productList" parameterType="hashMap" resultType="hashmap">
 		SELECT *
 		FROM test_goods
 		<choose>
@@ -126,7 +121,37 @@
 				WHERE gender LIKE concat('%',#{keyword},'%')
 			</when>
 		</choose>
+	</select>-->
+	
+
+	<select id="productList" parameterType="hashMap" resultType="hashmap">
+		SELECT im_db.product_detail.*, im_db.product_title.gender
+		FROM im_db.product_detail
+		LEFT OUTER JOIN im_db.product_title ON im_db.product_detail.product_code = im_db.product_title.product_code
+		<choose>				
+			<when test="condition == 'product_code' and keyword != ('')">
+				WHERE im_db.product_detail.product_code LIKE concat('%',#{keyword},'%')  
+			</when>
+			<when test="condition == 'color_name' and keyword !=('')">
+				WHERE color_name LIKE concat('%',#{keyword},'%')
+			</when>
+			<when test="condition == 'gender' and keyword !=('')">
+				WHERE gender LIKE concat('%',#{keyword},'%')
+			</when>
+		</choose>
 	</select>
+	
+	<update id="updateOrder" parameterType="hashMap" >
+		UPDATE order_manage
+		SET shipStat = #{shipStat}
+		WHERE custId = #{custId}
+				
+	</update>
+	
+	<delete id="deleteProduct" parameterType="hashMap">
+	DELETE FROM test_goods
+	WHERE product_code = #{product_code}
+	</delete>
 	
 <!-- 관리자 페이지 주문목록 -->		
 
@@ -146,6 +171,13 @@
 	</choose>
 	</select>
 
+		
+	<delete id="deleteOrder" parameterType="hashMap">
+	DELETE FROM order_manage
+	WHERE orderNo = #{orderNo}
+	</delete>
+	
+	
 <!-- insert	 -->
 
 	<insert id="joinCheck" parameterType="hashMap" >

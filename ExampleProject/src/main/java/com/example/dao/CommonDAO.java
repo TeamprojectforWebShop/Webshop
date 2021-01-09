@@ -37,8 +37,8 @@ public class CommonDAO extends AbstractDAO {
 	public List<Map<String, Object>> userList(Map<String, Object> map) { 
 		return (List<Map<String, Object>>)selectList("common.userList", map);}  
 	
-	public Map<String, Object> updateUser(Map<String, Object> map) { 
-		return (Map<String, Object>) update("common.updateUser", map);} 
+	public int updateUser(Map<String, Object> map) { 
+		return (Integer) update("common.updateUser", map);} 
 	
 	public int deleteUser(Map<String, Object> map){ 
 		return (Integer) delete("common.deleteUser", map);} 
@@ -47,9 +47,18 @@ public class CommonDAO extends AbstractDAO {
 	public List<Map<String, Object>> productList(Map<String, Object> map) { 
 		return (List<Map<String, Object>>)selectList("common.productList", map);} 
 	
+	public int deleteProduct(Map<String, Object> map){ 
+		return (Integer) delete("common.deleteProduct", map);} 
+	
 	//관리자 페이지 주문목록 보기
 	public List<Map<String, Object>> orderList(Map<String, Object> map) { 
 		return (List<Map<String, Object>>)selectList("common.orderList", map);} 
+	
+	public int updateOrder(Map<String, Object> map) { 
+		return (Integer) update("common.updateOrder", map);} 
+	
+	public int deleteOrder(Map<String, Object> map){ 
+		return (Integer) delete("common.deleteOrder", map);} 
 	
 	/*
 	 * 상품 자세히 보기

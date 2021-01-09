@@ -17,17 +17,15 @@
 					<col style="width: auto;" />
 					<col style="width: auto;" />
 					<col style="width: auto;" />
+					<!-- col style="width: auto;" />
 					<col style="width: auto;" />
 					<col style="width: auto;" />
 					<col style="width: auto;" />
 					<col style="width: auto;" />
-					<col style="width: auto;" />
-					<col style="width: auto;" />
-					<col style="width: auto;" />
+					<col style="width: auto;" /> -->
 				</colgroup>
 				<thead>
 					<tr>
-						<th>제품명</th>
 						<th>제품코드</th>
 						<th>색상</th>
 						<th>성별</th>
@@ -38,12 +36,12 @@
 						<th>F 사이즈</th>
 						<th>전체 사이즈 재고</th>
 						<th>생산일</th>
-						<th>가격</th>
+						<!-- th>가격</th>
 						<th>제품 사진</th>
 						<th>제품 설명1</th>
 						<th>제품 설명2</th>
 						<th>제품 설명3</th>
-						<th>제품 설명4</th>
+						<th>제품 설명4</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -56,7 +54,6 @@
 						<c:when test="${!empty list}">
 							<c:forEach var="list" items="${list}">
 								<tr>
-									<td><c:out value="${list.product_name}" /></td>
 									<td><c:out value="${list.product_code}" /></td>
 									<td><c:out value="${list.color_name}" /></td>
 									<td><c:out value="${list.gender}" /></td>
@@ -67,23 +64,32 @@
 									<td><c:out value="${list.f}" /></td>
 									<td><c:out value="${list.total}" /></td>
 									<td><c:out value="${list.manufacture_day}" /></td>
-									<td><c:out value="${list.product_price}" /></td>
+									<!-- td><c:out value="${list.product_price}" /></td>
 									<td><c:out value="${list.file}" /></td>
 									<td><c:out value="${list.text1}" /></td>
 									<td><c:out value="${list.text2}" /></td>
 									<td><c:out value="${list.text3}" /></td>
-									<td><c:out value="${list.text4}" /></td>
+									<td><c:out value="${list.text4}" /></td> -->
+									<td>
+										<button name="delProdBtn">삭제하기</button>
+									</td>
+									<td>
+										<button name="revProdBtn">수정하기</button>
+									</td>
 								</tr>
 							</c:forEach>
 						</c:when>
 					</c:choose>
 				</tbody>
 			</table>
+			<form name="manageHome" action="manage.do" method="GET">
+			<input type="submit" name="submit" value="관리자 메인으로" class="manage">
+			</form>
 		</div>
 			<form action="productList.do" method="get">
 		<label for="condition">검색조건</label>
 		<select name="condition" id="condition">
-			<option value="product_name" <c:if test="${condition eq 'product_name' }">selected</c:if>>제품명</option>
+			<!-- option value="product_name" <c:if test="${condition eq 'product_name' }">selected</c:if>>제품명</option> -->
 			<option value="product_code" <c:if test="${condition eq 'product_code' }">selected</c:if>>제품코드</option>
 			<option value="color_name" <c:if test="${condition eq 'color_name' }">selected</c:if>>색상</option>
 			<option value="gender" <c:if test="${condition eq 'gender' }">selected</c:if>>성별</option>
@@ -94,3 +100,22 @@
 		</form>
 	</div>
 </article>
+     <script>
+    //버튼이 있는 해당 row의 발주코드(pk값)을 찾아서 전달해주는 놈임
+    $('button[name=delProdBtn]').click(function (){
+    	// this -> button의 가장 가까운 tr을 찾고, tr의 자식의 0번째 값(0번째 td값)의 text를 가져온다.
+        let product_code = $(this).closest("tr").children().eq(0).text();
+        console.log(product_code);	// 내가 클릭한 놈 id 잘 가져왔나 web 콘솔에 띄우기
+    //삭제하기 버튼 누르면 임의의 form 생성 후 controller에 전송
+        if(confirm("정말로 삭제하시겠습니까?")){
+        let delForm = $('<form></form>');
+        delForm.attr("name","prodListDelete");
+        delForm.attr("method","get");
+        delForm.attr("action","prodListDelete.do");
+
+        delForm.append($('<input>', {type: 'hidden', name: 'product_code', value : product_code }));
+        delForm.appendTo('body');
+        delForm.submit();
+        }
+    });
+      </script>

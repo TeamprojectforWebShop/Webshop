@@ -32,11 +32,11 @@
         
         <mvc:interceptor>
         
-            <mvc:mapping path="/"/>
+            <mvc:mapping path="/**"/>
             <bean id="loggerInterceptor" class="com.example.common.logger.LoggerInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/"/>
+            <mvc:mapping path="/**"/>
             <!-- View -->
             <mvc:exclude-mapping path="/index.do"/> <!-- 로그인 없어도 되어야하는 주소를 적어줌 -->
             <mvc:exclude-mapping path="/login.do"/>
