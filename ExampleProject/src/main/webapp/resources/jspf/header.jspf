@@ -2,70 +2,130 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script> console.log('header'); </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopy shop any where</title>
+    <meta name="keywords" content="shopping mall, jacket, men, women">
+    <meta name="description" content="shop any where for women and men's ware">
+    <meta name="robots" content="index, follow">
+
+    <!-- open graph -->
+	<meta property="og:title" content="Shopy shop any where" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="shop any where for women and men's ware" />
+    <meta property="og:url" content="http://www.shopy.com" />
+    <meta property="og:image" content="http://www.shopy.com/images/logo.png" />
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- fontawesome -->
+    <script src="resources/Js/all.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="resources/Js/main.js"></script>
+
+    <!-- bootstrap grid -->
+    <link rel="stylesheet" href="resources/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="resources/css/star-rating.min.css">
+    <link rel="stylesheet" href="resources/css/main.css">
+
+</head>
 <body>
+<%
+	String sId = session.getId();
+	System.out.println("세션출력아이디 : " + sId);
+%>
 <c:if test="${map.msg ne null }">
 		<!-- 메세지 온게 있으면 alert으로 출력하는거 -->
-		<script>
+		<!-- <script>
 			alert('${map.msg}');
-		</script>
-	</c:if>
-<div id="header_form">
-		<header class="header_top">
-			<span class="left_menu"><a href="#">문의장소</a></span> <span
-				class="right_menu"> <c:if test="${userInfo == null }">
-					<a href="login.do">로그인</a>
-				</c:if> 
-				<c:if test="${userInfo != null}">
-					<a>${userInfo.name}님 환영합니다.</a>
-					<a href="logout.do">로그아웃</a>
-				</c:if>				
-				<c:if test="${userInfo.custRank == 1}">
-					<a href="manage.do">관리자 화면</a>
-				</c:if>
-				 <a href="mypage.do">마이페이지</a>
-				 <a href="#">장바구니</a>
-				 <a href="boardwrite.do">Q&A</a></span>
-		</header>
+		</script> -->
+</c:if>
+    <header>
+        <div class="top_navigation">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <ul class="contact_list">
+                        <li>
+                             <!-- <span class="envelope sprites">envelope</span>
+                             <a href="mailto:info@shopy.com">info@shopy.com</a> -->
+                        </li>
+                        <li>
+                            <!-- <span class="phone sprites">Phone</span>
+                            <span>453-5553-996</span> -->
+                        </li>
+                    </ul>
+                    <ul class="social_list">
+                    	<c:if test="${empty userInfo}">
+                    	<li>SME쇼핑몰에 오신 고객님 환영합니다.</li>
+                    	</c:if>
+                        <c:if test="${userInfo == null }">
+                        <li><a href="login.do"><i class="fab fa-instagram"></i></a></li>
+                        </c:if>
+                        <c:if test="${userInfo != null}">
+                        <li>${userInfo.name}님 환영합니다.</li>
+                        <li><a href="logout.do"><i class="fab fa-instagram"></i></a></li>
+			            </c:if>				
+				        <c:if test="${userInfo.custRank == 1}">
+                        <li><a href="manage.do"><i class="fab fa-instagram"></i></a></li>
+				        </c:if>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <nav class="main_navigation">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="gnb">
+                        <h1 class="logo"><a href="index.do">Shopy Logo</a></h1>
+                        <ul>
+                            <li><a href="">Products</a></li>
+                            <li><a href="">Hot Deals</a></li>
+                        </ul>
+                    </div>
+                    <ul class="shopping_nav">
+                        <li><span class="search_btn sprites">search</span></li>
+                        <li><a href="mypage.do" class="mypage sprites">mypage</a></li>                        
+                        <li><a href="resultcart.do" class="cart sprites" data-cart="99">cart</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <form action="search.do" method="get" >
+            <input type="text" name="search" placeholder="검색하세요" class="search_input">
+            <input type="submit" value="검색" class="search_btn sprites search_input">
+        </form>
+    </header>
+    <!--  $(function(){
+    var $searchBtn = $('.shopping_nav .search_btn'),
+        $searchForm = $('header form');
 
-		<header class="header_middle">
-			<a href="index.do"><img src="resources/image/logo.png" alt="로고"></a>
-		</header>
-
-		<nav class="header_bottom">
-			<ul class="main_menu">
-				<li><a href="#">할인품목</a></li>
-				<li><a href="#">메인메뉴1</a>
-					<ul class="sub_menu">
-						<li><a href="product_ex.do">서브메뉴1확인</a></li>
-						<li><a href="#">서브메뉴2</a></li>
-						<li><a href="#">서브메뉴3</a></li>
-					</ul></li>
-				<li><a href="#">메인메뉴2</a>
-					<ul class="sub_menu">
-						<li><a href="#">서브메뉴1</a></li>
-						<li><a href="#">서브메뉴2</a></li>
-						<li><a href="#">서브메뉴3</a></li>
-					</ul></li>
-				<li><a href="#">메인메뉴3</a>
-					<ul class="sub_menu">
-						<li><a href="#">서브메뉴1</a></li>
-						<li><a href="#">서브메뉴2</a></li>
-						<li><a href="#">서브메뉴3</a></li>
-					</ul></li>
-				<li><a href="#">메인메뉴4</a>
-					<ul class="sub_menu">
-						<li><a href="#">서브메뉴1</a></li>
-						<li><a href="#">서브메뉴2</a></li>
-						<li><a href="#">서브메뉴3</a></li>
-					</ul></li>
-			</ul>
-
-			<form class="search_bar" action="search.do" method="GET">
-				<input type="text" name="search" placeholder="검색하세요" class="search_input">
-				<input type="submit" name="submit" value="검색" class="search_submit">
-			</form>
-
-		</nav>
-	</div>
-
+    $searchBtn.click(function(){
+        $searchForm.toggleClass('active');
+    });-->
+    
+    <footer></footer>
 </body>
+</html>

@@ -82,24 +82,40 @@ public class CommonService {
 		 return commonDAO.detailPage(map); 
 	 }
 
-	/*
-	 * 결제페이지
-	 */
-	 public List<Map<String, Object>> cart(Map<String, Object>map) { 
-		 return	commonDAO.cart(map);
-	 }
-	 
-	 /*
-	 구매페이지
-	 */
-	 public List<Map<String, Object>> pay(Map<String, Object>map) { 
-		 return	commonDAO.pay(map);
-	 }
-	 
 	 /*
 		 * 메인에 제품 내용 뿌리기
 		 */
 		public List<Map<String, Object >> getList(Map<String, Object> map){ 
 			return commonDAO.getList(map);
 		}
+		
+//	추가됨 1-10
+		/*
+		 * 장바구니에 하나 넣기
+		 */
+		public List<Map<String, Object >> addcart(Map<String, Object> map){ 
+			return commonDAO.addcart(map);
+		}
+		
+		//구매페이지
+		public List<Map<String, Object >> checkcart(Map<String, Object> map){ 
+			return commonDAO.checkcart(map);
+		}
+		
+		//결제페이지
+		public List<Map<String, Object >> order(Map<String, Object> map){ 
+			return commonDAO.order(map);
+		}
+		
+		/*
+		 * 장바구니 페이지
+		 */ 
+		public List<Map<String, Object >> resultcart(Map<String, Object> map){ 
+			return commonDAO.resultcart(map);
+		}
+		
+		//장바구니삭제
+		public int deletecart(Map<String, Object> map){ 
+			return commonDAO.deletecart(map);
+		} 
 }

@@ -3,6 +3,53 @@
 
 <mapper namespace="common">
 
+<!-- 새로 추가됨! -->
+<!-- 장바구니 삭제 -->
+	<delete id="deletecart" parameterType="hashmap">
+		delete from ${table}
+		where idx = ${idx}
+	</delete>
+	
+	<!-- 장바구니 조회용 -->
+	<select id="resultcart" parameterType="hashmap" resultType="hashmap">
+		select *
+		from ${table}
+		where id = '${id}'
+	</select>
+
+<!-- 구매버튼을 누르면 발생함 -->
+	<insert id="addcart" parameterType="hashMap">
+		insert into ${table} (id, prodCode, prodName, size, color, count, price)
+		values(
+			#{id},
+			#{prodCode},
+			#{prodName},
+			#{size},
+			#{color},
+			#{count},
+			#{price}
+		)
+	</insert>
+	
+	<!-- 체크박스로 데이터 보내기 -->
+	<select id="checkcart" parameterType="hashMap" resultType="hashmap">
+		select *
+		from ${table}
+		where idx in (
+		<foreach collection="box" item="item" separator=", ">
+			#{item} 
+		</foreach>
+		)
+	</select>
+	
+	<!-- 계산 -->
+	<insert id="order" parameterType="hashMap">
+		insert into ${table} (custId, custName, prodCode, size, color, qty, price, name, phone, addr, addr2, addr3, addr4, addr5, shipStat)
+		values (
+		#{custId}, #{custName},#{prodCode}, #{size}, #{color}, #{qty}, #{price}, #{name}, #{phone},
+		#{addr}, #{addr2}, #{addr3}, #{addr4}, #{addr5}, #{shipStat}
+		)
+	</insert>
 	
 <!-- select	 -->
 
@@ -48,12 +95,6 @@
       )
 
    </insert>
-	
-	<!-- 구매페이지 미구현 -->
-	<select id="pay" parameterType="hashMap" resultType="hashmap">
-		select *
-		from test_cart
-	</select>
 	
 	<select id="search" parameterType="hashMap" resultType="hashmap">
 		SELECT *

@@ -14,62 +14,92 @@ response.setDateHeader("Expires", 0L);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>main</title>
-<link rel="stylesheet" type="text/css" href="resources/css/main.css">
-<script src="resources/Js/main.js"></script>
 </head>
 
 <body>
-
-	<div id="main_content">
-
-		<!-- 밑에서부터 슬라이드 시작 -->
-		<div class="slide_container">
-
-			<div class="mySlides fade">
-				<div class="numbertext">1 / 3</div>
-				<img src="resources/image/banner1.jpg">
-				<div class="text">
-					<a href="#">클릭1</a>
-				</div>
-			</div>
-
-			<div class="mySlides fade">
-				<div class="numbertext">2 / 3</div>
-				<img src="resources/image/banner2.jpg">
-				<div class="text">
-					<a href="#">클릭2</a>
-				</div>
-			</div>
-
-			<div class="mySlides fade">
-				<div class="numbertext">3 / 3</div>
-				<img src="resources/image/banner3.jpg">
-				<div class="text">
-					<a href="#">클릭3</a>
-				</div>
-			</div>
-			<!-- 여기까지 슬라이드 본문 -->
-
-			<!-- 밑은 양옆으로 옮기는 화살표 -->
-			<a class="left_btn smart_btn" onclick="plusSlides(-1)">◀</a> <a
-				class="right_btn smart_btn" onclick="plusSlides(1)">▶</a>
-		</div>
-		<div style="text-align: center">
-			<span class="dot" onclick="currentSlide(1)"></span> <span class="dot"
-				onclick="currentSlide(2)"></span> <span class="dot"
-				onclick="currentSlide(3)"></span>
-		</div>
-		</div>
-		<!-- 여기까지 슬라이드 -->
-
-		<!-- 현재 슬라이드 위치 표시 -->
-		
-		<div class="list">
+	<section class="main_slides">
+        <h2 class="hidden">main_slides</h2>
+        <ul>
+            <li class="slide slide1">
+                <div class="container slide_contents">
+                    <div class="contents jumbotron">
+                        <h2>이것이 코트다</h2>
+                        <h3>코트가 좋아</h3>
+                        <p>코트를 사줘요</p>
+                        <div class="price_order">
+                            <span class="price">가격입력1</span>
+                            <a class="order_now" href="">Order now</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="slide slide1">
+                <div class="container slide_contents">
+                    <div class="contents jumbotron">
+                        <h2>ㅎㅇ</h2>
+                        <h3>반갑습니다</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry </p>
+                        <div class="price_order">
+                            <span class="price">가격입력2</span>
+                            <a class="order_now" href="">Order now</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="slide slide1">
+                <div class="container slide_contents">
+                    <div class="contents jumbotron">
+                        <h2>ㅎㅎ</h2>
+                        <h3>Half Jacket + Skiny Trousers + Boot leather</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry </p>
+                        <div class="price_order">
+                            <span class="price">가격입력3</span>
+                            <a class="order_now" href="">Order now</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <main class="container">
+        <section class="new_arrivals">
+            <h2 class="content_title"><span>멋진</span> 상품들</h2>
+            <p class="content_desc">빨리 사주세요</p>
+            <ul class="new_arrivals_list row">
+             <c:forEach var="list" items="${list}">
+                <li id="product_02" class="col-md-3">
+                    <div class="list_contents">
+                        <div class="default">
+                            <img src="images/jacket_01.jpg" alt="jacket">       
+                            <h3>${list.product_name}</h3> 
+                            <h4>${list.product_price}</h4>
+                        </div>
+                        <div class="hover">
+                            <p>sizes :<span class="size">s - m - l - xl - f</span></p>
+                            <p class="color">
+                                <span class="red">red</span>
+                                <span class="darkmagenta">darkmagenta</span>
+                                <span class="lightskyblue">lightskyblue</span>
+                                <span class="lightgreen">lightgreen</span>
+                            </p>
+                            <hr/>
+                            <ul>
+                                <li><a href="detail.do?product_code=${list.product_code}" class="sprites share">제품자세히보기</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+              </c:forEach>
+            </ul>
+        </section>
+    
+	<%-- 	<div class="list">
 			<h2>제품리스트</h2>
 			<c:forEach var="list" items="${list}">
 			
 			<section class="main_section1">
-				<a href="product_detail.do?product_code=${list.product_code}">
+				<a href="detail.do?product_code=${list.product_code}">
 				<img src="resources/image/${list.product_code}.jpg" alt="사진">
 					<div class="list_option">
 						<ul>
@@ -80,7 +110,7 @@ response.setDateHeader("Expires", 0L);
 					</div></a>
 			</section>
 			</c:forEach>
-		</div>
+		</div> --%>
 
 </body>
 </html>
