@@ -79,33 +79,6 @@ public class HomeController {
 	      return jobj;
 	   }
 
-	// 게시판 글 작성
-	   @RequestMapping(value = "boardwrite.do", method = RequestMethod.GET)
-	   public ModelAndView boardwrite(@RequestParam Map<String, Object> map) {
-	      ModelAndView mv = new ModelAndView("/boardwrite");
-	       
-	      return mv;
-	   }
-	   
-	   @ResponseBody
-	   @RequestMapping(value = "/boardWriteAjax.do", method = RequestMethod.POST)
-	   public JSONObject boardWriteAjax(@RequestParam Map<String, Object> map, HttpServletRequest req) {
-
-	      log.debug("Request Parameter " + map); // 콘솔 로그 출력
-	      
-	      JSONObject jobj = new JSONObject();
-	      jobj.put("code", 400);
-
-	      int cnt = commonService.boardwrite(map);
-	      
-	      log.info("cnt : " + cnt);
-	      if (cnt > 0) {
-	         jobj.put("code", 200);
-	      }
-//	      req.getSession().setAttribute("userInfo", map);
-	      return jobj;
-	   }
-	   
 //관리자페이지시작
 	@RequestMapping(value = "manage.do", method = RequestMethod.GET)
 	public ModelAndView manage(@RequestParam Map<String, Object> map) {
@@ -179,6 +152,8 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+
 	
 	  @RequestMapping(value = "prodListDelete.do", method = RequestMethod.GET)
 	   public ModelAndView prodListDelete(@RequestParam Map<String, Object> map,  HttpServletRequest req ) {
@@ -483,4 +458,106 @@ public class HomeController {
 	      return mv;
 	}
 
+	/*
+	 * 게시판
+	 */
+			// 게시판 글 작성
+			   @RequestMapping(value = "boardwrite.do", method = RequestMethod.GET)
+			   public ModelAndView boardwrite(@RequestParam Map<String, Object> map) {
+			      ModelAndView mv = new ModelAndView("/boardwrite");
+			       
+			      return mv;
+			   }
+			   
+			   @ResponseBody
+			   @RequestMapping(value = "/boardWriteAjax.do", method = RequestMethod.POST)
+			   public JSONObject boardWriteAjax(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+
+			      log.debug("Request Parameter " + map); // 콘솔 로그 출력
+			      
+			      JSONObject jobj = new JSONObject();
+			      jobj.put("code", 400);
+
+			      int cnt = commonService.boardwrite(map);
+			      
+			      log.info("cnt : " + cnt);
+			      if (cnt > 0) {
+			         jobj.put("code", 200);
+			      }
+//			      req.getSession().setAttribute("userInfo", map);
+			      return jobj;
+			   }
+			   
+			   //게시판 삭제
+			   @ResponseBody
+			   @RequestMapping(value="/boarddelete.do", method=RequestMethod.POST)
+			   public JSONObject boarddelete(@RequestBody String bno, @RequestParam Map<String, Object> map, HttpServletRequest req) {
+			   
+			      log.info("삭제 bno Parameter : " + bno);
+			      
+			      JSONObject jobj = new JSONObject();
+			      jobj.put("code", 400);
+			      
+			      int rs = commonService.boarddelete(bno);
+			      if(rs > 0) {
+			         jobj.put("code", 200);
+			         req.getSession().setAttribute("userInfo", map);
+			      }
+			      
+			      return jobj;
+			   }
+			   @ResponseBody
+			   @RequestMapping(value="/boardupdate.do", method=RequestMethod.POST)
+			   public JSONObject boardupdate(@RequestParam Map<String, Object> map, HttpServletRequest req) {
+			   
+			      log.info("수정 : " + map);
+			      
+			      JSONObject jobj = new JSONObject();
+			      jobj.put("code", 400);
+			      
+			      int rs = commonService.boardupdate(map);
+			      if(rs > 0) jobj.put("code", 200);
+			      
+			      
+			      return jobj;
+			   }
+			   
+			   @RequestMapping(value = "boardread.do", method = RequestMethod.GET)
+			   public ModelAndView boardread(@RequestParam Map<String, Object> map)  {
+
+			      log.debug("Request Parameter : " + map);
+			      
+			      ModelAndView mv = new ModelAndView("/boardread");
+			      Map<String, Object > boardread = commonService.boardread(map);
+			      
+			      log.info("boardread 결과 : " + boardread);
+			        
+			      mv.addObject("boardread", boardread);
+			      return mv;
+			   }
+
+			   @RequestMapping(value = "board.do", method = RequestMethod.GET)
+			   public ModelAndView board(@RequestParam Map<String, Object> map) {
+				   
+				   log.debug("Request Parameter : " + map);
+				   
+				   ModelAndView mv = new ModelAndView("/board");
+				   
+				   return mv;
+			   }
+			   @RequestMapping(value = "boardlist.do", method = RequestMethod.GET)
+			   public ModelAndView boardlist(@RequestParam Map<String, Object> map)  {
+				   
+				   log.debug("Request Parameter : " + map);
+				   
+				   ModelAndView mv = new ModelAndView("/boardlist");
+				   List<Map<String, Object>> list = commonService.boardlist(map);
+				   
+				   log.debug("search SQL result : " + list);
+				   mv.addObject("list", list);
+				   return mv;
+			   }
+				/*
+				 * 게시판끝
+				 */
 }

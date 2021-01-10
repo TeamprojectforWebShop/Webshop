@@ -30,9 +30,6 @@ public class CommonDAO extends AbstractDAO {
 	//아이디 중복체크    
 	public int idcheck(String id) { return (Integer) selectOne("common.idcheck", id);}
 	
-	//게시판
-	public int boardwrite(Map<String, Object> map) { return (Integer) insert ("common.boardwrite", map);}
-	
 	//관리자 페이지 유저목록 보기
 	public List<Map<String, Object>> userList(Map<String, Object> map) { 
 		return (List<Map<String, Object>>)selectList("common.userList", map);}  
@@ -60,6 +57,8 @@ public class CommonDAO extends AbstractDAO {
 	public int deleteOrder(Map<String, Object> map){ 
 		return (Integer) delete("common.deleteOrder", map);} 
 	
+	
+//	제품다오
 	/*
 	 * 상품 자세히 보기
 	 */
@@ -73,8 +72,6 @@ public class CommonDAO extends AbstractDAO {
 	public List<Map<String, Object>> getList(Map<String, Object> map) {
 		return (List<Map<String, Object>>)selectList("common.getList", map);
 	} 
-	
-//	추가됨 1-10
 	
 	/*
 	 * 장바구니
@@ -102,4 +99,31 @@ public class CommonDAO extends AbstractDAO {
 		public List<Map<String, Object>> resultcart(Map<String, Object> map) {
 			return (List<Map<String, Object>>)selectList("common.resultcart", map);
 		}
+		
+		
+//		게시판 다오
+		//게시판
+		public int boardwrite(Map<String, Object> map) {
+			return (Integer) insert ("common.boardwrite", map);
+		}
+		
+		//게시판 수정
+		public int boardupdate(Map<String, Object> map) { 
+		      return (Integer) update("common.boardupdate", map);
+		}
+		//게시판 삭제
+		   public int boarddelete(String bno){ 
+		      return (Integer) delete("common.boarddelete", bno);} 
+
+			/*
+			 * 게시판읽기
+			 */
+		   public Map<String, Object > boardread(Map<String, Object> map) { 
+			      return (Map<String, Object >) selectOne ("common.boardread", map);}
+
+		   		/*
+				 * 게시판리스트부르기
+				 */
+		   public List<Map<String, Object >> boardlist(Map<String, Object> map) { 
+			   return  (List<Map<String, Object >>) selectList ("common.boardlist", map);}
 }

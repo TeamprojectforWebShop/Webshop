@@ -20,37 +20,40 @@
       <hr />
 
       <section id="container">
-         <form role="form" method="get" name="boardForm"  action="boardwrite.do">
+         <form role="form" method="get" name="boardForm" action="boardwrite.do">
             <table>
                <tbody>
                   <tr>
                      <td>
                         <label for="title">제목</label>
-                        <!-- <input type="text" id="title" name="title" required> -->
                         <select name="title" id ="title" >
-                        <option>제목을 선택하세요</option>
-                        <option value="상품관련 문의">상품 관련문의</option>
-                        <option value="사이즈 문의">사이즈 문의</option>
-                        <option value="재입고 문의">재입고 문의</option>
+                           <option disabled="disabled">제목을 선택하세요</option>
+                           <option value="상품관련 문의">상품 관련문의</option>
+                           <option value="사이즈 문의">사이즈 문의</option>
+                           <option value="재입고 문의">재입고 문의</option>
                         </select>
                      </td>
                   </tr>
                   <tr> 
                      <td>
                         <label for="content">내용</label>
-                        <textarea id="content" name="content" required ></textarea>
+                        <textarea id="content" name="content" required
+                        placeholder="내용을 입력해수제요" rows="15" cols="50"></textarea>
                      </td>
                   </tr>
                   <tr>
                      <td>
                         <label for="writer">작성자</label>
-                        <input type="text" id="writer" name="writer" value="${sessionScope.userInfo.name}"readonly/ >
+                        <input type="text" id="writer" name="writer" value="${sessionScope.userInfo.name}"readonly>
                      </td>
                    
                   <tr>
                      <td>
                         <input type="button" id="submitBtn" value="작성">
                      </td>
+                     
+                        
+                     
                   </tr>
                </tbody>
             </table>

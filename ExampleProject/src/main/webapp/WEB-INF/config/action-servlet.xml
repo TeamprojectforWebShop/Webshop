@@ -44,6 +44,7 @@
             <mvc:exclude-mapping path="/idcheck.do"/>
             <mvc:exclude-mapping path="/joinCheck.do" />
             <!-- Return Objects Method -->
+            <mvc:exclude-mapping path="/resultcart.do"/>
             <mvc:exclude-mapping path="/loginCheck.do"/>
             <!-- Test -->
             <mvc:exclude-mapping path="/test.do"/>

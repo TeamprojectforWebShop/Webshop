@@ -93,14 +93,36 @@
             #{content}, 
             #{writer}
       )
-
    </insert>
+   
+   <!-- 게시판 리스트 -->
+       <select id="boardlist" parameterType="hashMap" resultType="hashMap">
+   select * from board_manage
+   </select>
+   <!-- 게시글 조회 -->
+   <select id="boardread" parameterType="hashMap" resultType="hashMap">
+    select bno, title, content, writer, regdate from board_manage where bno = #{bno}
+    </select>
+   
 	
 	<select id="search" parameterType="hashMap" resultType="hashmap">
 		SELECT *
 		FROM test_goods
 			WHERE product_name LIKE concat('%',#{search},'%')
 	</select>
+	 <!-- 게시글 수정 -->
+	<update id="boardupdate" parameterType="hashMap">
+    update board_manage set
+    title = #{title},
+    content = #{content}
+    Where bno = #{bno}
+   </update>
+   
+   <!-- 게시글삭제 -->
+   <delete id="boarddelete" parameterType ="String">
+     Delete from board_manage 
+     where bno = ${bno}
+   </delete>
 	
 	
 	<select id="loginCheck" parameterType="hashMap" resultType="hashmap">
@@ -201,7 +223,8 @@
 		FROM order_manage
 	<choose>
 		<when test="condition == 'custId' and keyword != ('')">
-			WHERE id LIKE custId('%',#{keyword},'%')
+			WHERE custId LIKE concat('%',#{keyword},'%')
+			<!-- WHERE id LIKE custId('%',#{keyword},'%') -->
 		</when>					
 		<when test="condition == 'shipStat' and keyword != ('')">
 			WHERE shipStat LIKE concat('%',#{keyword},'%')  

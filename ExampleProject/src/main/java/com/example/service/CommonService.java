@@ -31,14 +31,9 @@ public class CommonService {
 	public int updateMember(Map<String, Object> map){ return commonDAO.updateMember(map);}
 	
 	//아이디 중복체크
-	public int idcheck(String id) 
-	{
-	      return commonDAO.idcheck(id);}
-	
-	//게시판
-	public int boardwrite(Map<String, Object>map) 
-	{ 
-		  return commonDAO.boardwrite(map);   }
+	public int idcheck(String id) {
+	      return commonDAO.idcheck(id);
+	}
 	
 	//관리자 유저목록 페이지
 	public List<Map<String, Object>> userList(Map<String, Object> map) 
@@ -75,6 +70,8 @@ public class CommonService {
 	{ 
 		return commonDAO.deleteOrder(map);} 
 	
+	
+//	여기서부는 제품페이지
 	/*
 	 * 제품 상세보기
 	 */
@@ -89,7 +86,6 @@ public class CommonService {
 			return commonDAO.getList(map);
 		}
 		
-//	추가됨 1-10
 		/*
 		 * 장바구니에 하나 넣기
 		 */
@@ -113,9 +109,46 @@ public class CommonService {
 		public List<Map<String, Object >> resultcart(Map<String, Object> map){ 
 			return commonDAO.resultcart(map);
 		}
-		
-		//장바구니삭제
+
+		/*
+		 * 장바구니삭제
+		 */
 		public int deletecart(Map<String, Object> map){ 
 			return commonDAO.deletecart(map);
-		} 
+		}
+
+		
+//		여기서부터 게시판
+		/*
+		 * 게시판 수정
+		 */
+		public int boardupdate(Map<String, Object> map){
+			return commonDAO.boardupdate(map);
+		}
+
+		/*
+		 * 게시판 삭제
+		 */
+		public int boarddelete(String bno){
+			return commonDAO.boarddelete(bno);
+		}
+
+		/*
+		 * 게시판목록
+		 */
+		public List<Map<String, Object>> boardlist(Map<String, Object> map) {
+			return  commonDAO.boardlist(map);
+		} //이거 상태 이상함
+		
+		/*
+		 * 게시판글쓰기
+		 */
+		public Map<String, Object> boardread(Map<String, Object>map) {
+			return commonDAO.boardread(map);
+		}
+		
+		//글쓰기 기능
+		public int boardwrite(Map<String, Object>map){
+			return commonDAO.boardwrite(map);
+		}
 }

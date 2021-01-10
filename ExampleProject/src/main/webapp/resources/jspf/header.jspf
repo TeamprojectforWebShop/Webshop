@@ -103,6 +103,7 @@
                         <ul>
                             <li><a href="">Products</a></li>
                             <li><a href="">Hot Deals</a></li>
+                            <li><a href="board.do">임시 게시판이동</a></li>
                         </ul>
                     </div>
                     <ul class="shopping_nav">
