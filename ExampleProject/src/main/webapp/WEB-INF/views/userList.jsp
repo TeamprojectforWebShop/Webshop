@@ -7,13 +7,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>회원 목록</title>
+	<link rel="stylesheet" href="resources/css/bootstrap.css">
 </head>
 <body>
 	<article>
 		<div class="container">
 			<h2>User list</h2>
+			<br>
+			<form action="userList.do" method="get">
+			<label for="condition">검색조건</label>
+			<select name="condition" id="condition">
+				<option value="id" <c:if test="${condition eq 'id' }">selected</c:if>>유저id</option>
+				<option value="name" <c:if test="${condition eq 'name' }">selected</c:if>>유저명</option>
+				<option value="custRank" <c:if test="${condition eq 'custRank' }">selected</c:if>>유저등급</option>
+			</select>
+			<input type="text" name="keyword" id="keyword"
+				placeholder="검색어 ..." value="${keyword }"/>
+			<button type="submit">검색</button>
+			</form>
 			<div class="table-responsive">
-				<table class="table table-striped table-sm">
+					<table class="table table-hover"> 
 					<colgroup>
 						<col style="width: auto;" />
 						<col style="width: 15%;" />
@@ -68,17 +81,6 @@
 				<input type="submit" name="submit" value="관리자 메인으로" class="manage">
 				</form>
 			</div>
-				<form action="userList.do" method="get">
-			<label for="condition">검색조건</label>
-			<select name="condition" id="condition">
-				<option value="id" <c:if test="${condition eq 'id' }">selected</c:if>>유저id</option>
-				<option value="name" <c:if test="${condition eq 'name' }">selected</c:if>>유저명</option>
-				<option value="custRank" <c:if test="${condition eq 'custRank' }">selected</c:if>>유저등급</option>
-			</select>
-			<input type="text" name="keyword" id="keyword"
-				placeholder="검색어 ..." value="${keyword }"/>
-			<button type="submit">검색</button>
-			</form>
 			</div>
 	</article>
 	

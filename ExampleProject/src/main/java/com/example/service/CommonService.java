@@ -69,57 +69,9 @@ public class CommonService {
 	public int deleteOrder(Map<String, Object> map)
 	{ 
 		return commonDAO.deleteOrder(map);} 
-	
-	
-//	여기서부는 제품페이지
-	/*
-	 * 제품 상세보기
-	 */
-	public List<Map<String, Object >> detailPage(Map<String, Object> map) {
-		 return commonDAO.detailPage(map); 
-	 }
-
-	 /*
-		 * 메인에 제품 내용 뿌리기
-		 */
-		public List<Map<String, Object >> getList(Map<String, Object> map){ 
-			return commonDAO.getList(map);
-		}
 		
 		/*
-		 * 장바구니에 하나 넣기
-		 */
-		public List<Map<String, Object >> addcart(Map<String, Object> map){ 
-			return commonDAO.addcart(map);
-		}
-		
-		//구매페이지
-		public List<Map<String, Object >> checkcart(Map<String, Object> map){ 
-			return commonDAO.checkcart(map);
-		}
-		
-		//결제페이지
-		public List<Map<String, Object >> order(Map<String, Object> map){ 
-			return commonDAO.order(map);
-		}
-		
-		/*
-		 * 장바구니 페이지
-		 */ 
-		public List<Map<String, Object >> resultcart(Map<String, Object> map){ 
-			return commonDAO.resultcart(map);
-		}
-
-		/*
-		 * 장바구니삭제
-		 */
-		public int deletecart(Map<String, Object> map){ 
-			return commonDAO.deletecart(map);
-		}
-
-		
-//		여기서부터 게시판
-		/*
+		 * 게시판부분
 		 * 게시판 수정
 		 */
 		public int boardupdate(Map<String, Object> map){

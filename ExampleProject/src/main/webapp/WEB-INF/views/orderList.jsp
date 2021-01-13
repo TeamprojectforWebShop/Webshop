@@ -1,33 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<article>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>회원 목록</title>
+	<link rel="stylesheet" href="resources/css/bootstrap.css">
+</head>
+<body>
+	<article>
 	<div class="container">
 		<h2>Order list</h2>
+	<br>
+	<form action="orderList.do" method="get">
+		<label for="condition">검색조건</label>
+		<select name="condition" id="condition">
+			<option value="custId" <c:if test="${condition eq 'custId' }">selected</c:if>>고객id</option>
+			<option value="shipStat" <c:if test="${condition eq 'shipStat' }">selected</c:if>>배송상태</option>
+			<option value="orderNo" <c:if test="${condition eq 'orderNo' }">selected</c:if>>주문번호</option>
+		</select>
+		<input type="text" name="keyword" id="keyword"
+			placeholder="검색어 ..." value="${keyword }"/>
+		<button type="submit">검색</button>
+	</form><!-- condition이라는 파라미터 명으로 넘어간다. -->
 		<div class="table-responsive">
-			<table class="table table-striped table-sm">
+			<table class="table table-hover"> 
 				<colgroup>
+					<col style="width: 8%;" />
+					<col style="width: 8%;" />
+					<col style="width: 8%;" />
+					<col style="width: 8%;" />
 					<col style="width: 10%;" />
+					<col style="width: 6%;" />
+					<col style="width: 8%;" />
 					<col style="width: 10%;" />
+					<col style="width: 8%;" />
 					<col style="width: 10%;" />
-					<col style="width: 10%;" />
-					<col style="width: 10%;" />
-					<col style="width: 5%;" />
-					<col style="width: 5%;" />
-					<col style="width: 15%;" />
-					<col style="width: 10%;" />
-					<col style="width: 5%;" />
-					<col style="width: 5%;" />
-					<col style="width: 5%;" />
+					<col style="width: 9%;" />
+					<col style="width: 9%;" />
+
 				</colgroup>
 				<thead>
 					<tr>
 						<th>주문번호</th>
 						<th>유저ID</th>
-						<th>유저이름</th>
+						<th>유저명</th>
 						<th>제품코드</th>
 						<th>제품명</th>
-						<th>제품사이즈</th>
-						<th>제품컬러</th>
+						<th>사이즈</th>
+						<th>컬러</th>
 						<th>주소1</th>
 						<th>주소2</th>
 						<th>주소3</th>
@@ -50,7 +73,7 @@
 									<td><c:out value="${list.custId}" /></td>
 									<td><c:out value="${list.custName}" /></td>
 									<td><c:out value="${list.prodCode}" /></td>
-									<td><c:out value="${list.name}" /></td>
+									<td><c:out value="${list.prodName}" /></td>
 									<td><c:out value="${list.size}" /></td>
 									<td><c:out value="${list.color}" /></td>
 									<td><c:out value="${list.addr}" /></td>
@@ -74,17 +97,6 @@
 			<input type="submit" name="submit" value="관리자 메인으로" class="manage">
 			</form>
 		</div>
-			<form action="orderList.do" method="get">
-		<label for="condition">검색조건</label>
-		<select name="condition" id="condition">
-			<option value="custId" <c:if test="${condition eq 'custId' }">selected</c:if>>고객id</option>
-			<option value="shipStat" <c:if test="${condition eq 'shipStat' }">selected</c:if>>배송상태</option>
-			<option value="orderNo" <c:if test="${condition eq 'orderNo' }">selected</c:if>>주문번호</option>
-		</select>
-		<input type="text" name="keyword" id="keyword"
-			placeholder="검색어 ..." value="${keyword }"/>
-		<button type="submit">검색</button>
-	</form><!-- condition이라는 파라미터 명으로 넘어간다. -->
 </div>
 </article>
  <script src="https://code.jquery.com/jquery-3.5.1.js"
@@ -112,19 +124,22 @@
       </script>
       <script>
       $('button[name = modOrderBtn]').click(function (){
-    	  let custId = $(this).closest("tr").children().eq(1).text();
+    	  let orderNo = $(this).closest("tr").children().eq(0).text();
           let shipStat = $(this).closest("tr").children().eq(11).children().val();
           console.log(shipStat);	
-          if(confirm(custId + "님의 배송 정보를 수정하시겠습니까?")){
+          if(confirm("주문번호" + orderNo + "의 배송 정보를 수정하시겠습니까?")){
           let modForm = $('<form></form>');
           modForm.attr("name","modOrderList");
           modForm.attr("method","post");
           modForm.attr("action","modOrderList.do");
 
-          modForm.append($('<input>', {type: 'hidden', name: 'custId', value : custId }));
+          modForm.append($('<input>', {type: 'hidden', name: 'orderNo', value : orderNo }));
           modForm.append($('<input>', {type: 'hidden', name: 'shipStat', value : shipStat }));
           modForm.appendTo('body');
           modForm.submit();
           }
       });
       </script>
+
+</body>
+</html>

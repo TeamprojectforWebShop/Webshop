@@ -2,54 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="common">
-
-<!-- 새로 추가됨! -->
-<!-- 장바구니 삭제 -->
-	<delete id="deletecart" parameterType="hashmap">
-		delete from ${table}
-		where idx = ${idx}
-	</delete>
-	
-	<!-- 장바구니 조회용 -->
-	<select id="resultcart" parameterType="hashmap" resultType="hashmap">
-		select *
-		from ${table}
-		where id = '${id}'
-	</select>
-
-<!-- 구매버튼을 누르면 발생함 -->
-	<insert id="addcart" parameterType="hashMap">
-		insert into ${table} (id, prodCode, prodName, size, color, count, price)
-		values(
-			#{id},
-			#{prodCode},
-			#{prodName},
-			#{size},
-			#{color},
-			#{count},
-			#{price}
-		)
-	</insert>
-	
-	<!-- 체크박스로 데이터 보내기 -->
-	<select id="checkcart" parameterType="hashMap" resultType="hashmap">
-		select *
-		from ${table}
-		where idx in (
-		<foreach collection="box" item="item" separator=", ">
-			#{item} 
-		</foreach>
-		)
-	</select>
-	
-	<!-- 계산 -->
-	<insert id="order" parameterType="hashMap">
-		insert into ${table} (custId, custName, prodCode, size, color, qty, price, name, phone, addr, addr2, addr3, addr4, addr5, shipStat)
-		values (
-		#{custId}, #{custName},#{prodCode}, #{size}, #{color}, #{qty}, #{price}, #{name}, #{phone},
-		#{addr}, #{addr2}, #{addr3}, #{addr4}, #{addr5}, #{shipStat}
-		)
-	</insert>
 	
 <!-- select	 -->
 
@@ -58,32 +10,6 @@
 	    select count(*) from customer_manage 
 	    where id = #{id}
 	 </select>
-
-	<!-- 제품 상세페이지 문장 -->
-	<select id="detailPage" parameterType="hashMap" resultType="hashMap">
-		SELECT * 
-		FROM test_goods
-		where product_code = #{product_code}
-	</select>
-	
-	<!-- 제품 리스트 문장 -->
-	<select id="getList" parameterType="hashMap" resultType="hashmap">
-		SELECT *
-		FROM test_goods
-	</select>
-	
-	<!-- 장바구니 -->
-	<insert id="cart" parameterType="hashMap">
-		insert into ${table} (id, product_code, size, color_name, count, price)
-		values(
-			#{id},
-			#{product_code},
-			#{size},
-			#{color_name},
-			#{count},
-			#{price}
-		)
-	</insert>
 	
 	<!-- 게시판 -->
    <insert id="boardwrite" parameterType="hashMap">
@@ -93,14 +19,36 @@
             #{content}, 
             #{writer}
       )
-
    </insert>
+   
+   <!-- 게시판 리스트 -->
+       <select id="boardlist" parameterType="hashMap" resultType="hashMap">
+   select * from board_manage
+   </select>
+   <!-- 게시글 조회 -->
+   <select id="boardread" parameterType="hashMap" resultType="hashMap">
+    select bno, title, content, writer, regdate from board_manage where bno = #{bno}
+    </select>
+   
 	
 	<select id="search" parameterType="hashMap" resultType="hashmap">
 		SELECT *
 		FROM test_goods
 			WHERE product_name LIKE concat('%',#{search},'%')
 	</select>
+	 <!-- 게시글 수정 -->
+	<update id="boardupdate" parameterType="hashMap">
+    update board_manage set
+    title = #{title},
+    content = #{content}
+    Where bno = #{bno}
+   </update>
+   
+   <!-- 게시글삭제 -->
+   <delete id="boarddelete" parameterType ="String">
+     Delete from board_manage 
+     where bno = ${bno}
+   </delete>
 	
 	
 	<select id="loginCheck" parameterType="hashMap" resultType="hashmap">
@@ -201,7 +149,8 @@
 		FROM order_manage
 	<choose>
 		<when test="condition == 'custId' and keyword != ('')">
-			WHERE id LIKE custId('%',#{keyword},'%')
+			WHERE custId LIKE concat('%',#{keyword},'%')
+			<!-- WHERE id LIKE custId('%',#{keyword},'%') -->
 		</when>					
 		<when test="condition == 'shipStat' and keyword != ('')">
 			WHERE shipStat LIKE concat('%',#{keyword},'%')  
@@ -257,10 +206,4 @@
 	
 	</update>
 	
-	
 </mapper>
-
-		
-<!--	<select id="selectMyoderGoodsList" parameterType="hashMap" resultType="hashMap">
-		상품 목록 저장한 테이블 넣기
-	</select> -->

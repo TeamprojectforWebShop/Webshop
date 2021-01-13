@@ -7,93 +7,138 @@
 <html>
 <head>
 <meta charset="utf-8">
-
+<link rel="stylesheet" href="resources/css/bootstrap.css">
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="resources/css/bootstrap-theme.min.css">
 </head>
 
 <body>
-	<h3>내 상세 정보</h3>
-<form name="frm_mod_member" method="post" role="form">
-	<div id="detail_table">
-		<table>
-			<tbody>
-				<tr class="dot_line">
-					<td class="fixed_join">아이디</td>
-					<td>
-						<input name="id" id="id" type="text" size="20" value="${sessionScope.userInfo.id }"  readonly/>
-					</td>
-					 <td>
-					</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">비밀번호</td>
-					<td>
-					  <input name="pwd" id="pwd" type="password" size="20" value="${sessionScope.userInfo.pwd }" />
-					</td>
-					<!--<td>
-					  <input type="button" value="수정하기" onClick="fn_modify_member_info('pwd')" />
-					</td>
-					-->
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이름</td>
-					<td>
-					 	<input type="text" id="name" name="name" value="${sessionScope.userInfo.name }">	
-					 </td>
-					 <td>
-					</td>
-				</tr>
-			
-				<tr class="dot_line">
-					<td class="fixed_join">휴대폰번호</td>
-					<td>
-					   <input type="text" id="contact" name="contact" value="${sessionScope.userInfo.contact}">
-				    </td>
-				   
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이메일<br>(e-mail)</td>
-					<td>
-					   <input type="text" id="email" name="email" size=20 value="${sessionScope.userInfo.email }" />
-					 
-				
-					</td>
-				
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">주소</td>
-					<td>
-					   <input type="text" id="addr4" name="addr4" size=5 value="${sessionScope.userInfo.addr4 }" > <!-- <a href="javascript:execDaumPostcode()">우편번호검색</a> -->
-					   <input type="button" onclick="execDaumPostcode()" value="우편번호찾기">
-					  <br>
-					  <p> 
-						  도로명 주소:<br><input type="text" id="addr"  name="addr" size="50" value="${sessionScope.userInfo.addr }"><br>
-						  지번 주소: <input type="text" id="addr3" name="addr3" size="50" value="${sessionScope.userInfo.addr3 }"><br>
-						  참고 주소: <input type="text" id="extraAddress" name="addr5" size="50" value="${sessionScope.userInfo.addr5 }"><br>
-						  상세 주소: <input type="text" id="addr2" name="addr2" size="50" value="${sessionScope.userInfo.addr2 }" />
-											  	  
-					   </p>
-					</td>
-					</tr>
-			</tbody>
-		</table>
-		</div>
-		<div class="clear">
-		<br><br>
-		<table align=center>
-		<tr>
-			<td>
-				<input type="button" value="수정하기" id="modMemeberButton"/>
-			</td>
-			<td >
-				<input type="hidden" name="command"  value="modify_my_info" /> 
-				<input name="btn_cancel_member" type="button"  value="수정 취소">
-			</td>
-		</tr>
-	</table>
-	</div>
-	
-</form>	
-
+	 <div class="row">
+    
+       <div class="col-xs-12 col-sm-12">
+       <h2>&nbsp;</h2> 
+       <h2 class="text-center">내 상세정보</h2>
+       </div>        
+        
+       <div class="col-xs-3 col-sm-3"></div>   
+       <div class="col-xs-8 col-sm-8">
+            
+         <div >      
+           <p>&nbsp;</p>
+            
+           <form class="form-horizontal" name="frm_mod_member" method="post">
+          
+            <div class="form-group">
+              <div class="col-sm-2 control-label">
+                  <label for="id">아이디</label>
+              </div>
+              <div class="col-sm-6">
+                  <input type="text" class="form-control" name="id" id="id" value="${sessionScope.userInfo.id }"  readonly/>
+              </div>
+           
+          </div>
+            
+           <div class="form-group">
+              <div class="col-sm-2 control-label">
+                  <label id="pwd">비밀번호</label>
+              </div>
+              <div class="col-sm-6">
+                  <input type="password" class="form-control" name="pwd" id="pwd" value="${sessionScope.userInfo.pwd }" />
+              </div>
+           </div>
+            <div class="form-group">
+               <div class="col-sm-2 control-label">
+                 <label id="name">이름</label>
+               </div>
+               <div class="col-sm-6">
+                   <input type="text" class="form-control" name="name" id="name" value="${sessionScope.userInfo.name }">
+                  </div>
+            </div>       
+            
+            
+                     <div class="form-group">
+                       <div class="col-sm-2 control-label">
+                           <label id="contact">전화번호</label>
+                       </div>
+                       <div class="col-sm-6">
+                           <input type="text" class="form-control" name="contact" id="contact" value="${sessionScope.userInfo.contact}">
+                       </div>
+                    </div>
+                  
+            
+            <div class="form-group">
+               <div class="col-sm-2 control-label">
+                 <label id="email">이메일</label>
+               </div>
+               <div class="col-sm-6">
+                   <input type="email" class="form-control" name="email" id="email" value="${sessionScope.userInfo.email }" />
+               </div>
+            </div>   
+         
+             
+             <div class="form-group">
+               <div class="col-sm-2 control-label">
+                   <label for="address">주소 입력</label>
+               </div>
+               <div class="col-sm-3">
+                <input type="text" id="postcode" placeholder="우편번호"  name="addr4" class="form-control" value="${sessionScope.userInfo.addr4 }">
+               </div>
+               <div class="col-sm-3">
+               <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary">
+               </div>
+            </div>   
+            
+          
+             <div class="form-group"> 
+                <div class="col-sm-2 control-label">
+                   <label for="addr">도로명주소</label>
+                </div>
+                <div class="col-sm-6"> 
+                  <input type="text" id="addr" placeholder="도로명주소" name="addr"   class="form-control" value="${sessionScope.userInfo.addr }">
+                  </div>
+             </div>
+             <div class="form-group"> 
+               <div class="col-sm-2 control-label">
+                  <label for="addr3">지번주소</label>
+              
+               </div>
+                 <span id="guide" style="color: #999; display: none"></span>
+               <div class="col-sm-6"> 
+                 <input type="text" id="addr3" placeholder="지번주소" name="addr3"   class="form-control" value="${sessionScope.userInfo.addr3 }">
+                 </div>
+            </div>
+            <div class="form-group"> 
+               <div class="col-sm-2 control-label">
+                  <label for="addr5">참고주소</label>
+               </div>
+               <div class="col-sm-6"> 
+                 <input type="text" id="extraAddress" placeholder="참고주소" name="addr5"   class="form-control" value="${sessionScope.userInfo.addr5 }">
+                 </div>
+            </div>
+            <div class="form-group"> 
+               <div class="col-sm-2 control-label">
+                  <label for="addr2">상세주소</label>
+               </div>
+               <div class="col-sm-6"> 
+                 <input type="text" id="addr2" placeholder="상세주소" name="addr2"   class="form-control"  value="${sessionScope.userInfo.addr2 }">
+                 </div>
+            </div>
+             
+        
+            <div class="form-group" >
+               <div class="col-sm-12  text-center">
+                <input type="button" class="btn-seong" value="수정하기" id="modMemeberButton"/>
+              
+               </div>
+            </div>
+            
+            
+           </form> 
+         </div>
+       </div>
+    
+   </div>
+     
 
 <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 <script src="https://code.jquery.com/jquery-3.5.1.js" 

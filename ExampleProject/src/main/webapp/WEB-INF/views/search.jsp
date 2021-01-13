@@ -8,44 +8,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>검색결과</title>
-<link rel="stylesheet" type="text/css" href="resources/css/main.css">
-<script src="/JavaScript/main.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
 </head>
 
 <body>
+		<div class="container">
 		<h2>상품목록</h2>
-		<c:if test="${sessionScope.adminId != null}">
-		<button type="button" id="btnAdd">상품등록</button><br>
-		</c:if>
-		<table border="1">
-		<tr>
-			<th>상품 코드</th>
-			<th>상품이미지</th>
-			<th>상품명</th>
-			<th>가격</th>
-		</tr>
-		<c:forEach var="row" items="${list}">
+		<table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">재품이름</th>
+                            <th class="text-center">사이즈</th>
+                            <th class="text-center">가격</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+		<c:forEach var="list" items="${list}">
 		<tr>
 			<td>
-				${row.product_code}
-			</td>
-			<td>
-				<a href="prodcut_detail.do?prodcut_code=${row.product_code}"> <!-- 클릭시 상품 상세정보로 이동 -->
-				<img src="resources/image/${row.product_code}.jpg" width="120px" height="110px"> 
-				</a>
+				<img src="resources/images/close/${list.product_code}.jpg" width="120px" height="110px"> 
 			</td>
 			<td align="center">
-				<a href="product_detail.do?product_code=${row.product_code}">${row.product_name}</a><br>
-				<c:if test="${sessionScope.adminId != null }">
-					<a href="${path}/shop/product/edit/${row.productId}">[상품편집]</a>
-					</c:if>
+				<a href="detail.do?product_code=${list.product_code}">${list.product_name}</a><br>
 			</td>
+			<td class="text-center"> ${list.prodName}</td>
 			<td>
-				
-				<fmt:formatNumber value="${row.product_price}" pattern="###,###,###"/>
+				<fmt:formatNumber value="${list.product_price}" pattern="###,###,###"/>
 			</td>
-			</tr>
-			</c:forEach>
-		</table>
+		</tr>
+		</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>

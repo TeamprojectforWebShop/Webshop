@@ -1,11 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>회원 목록</title>
+	<link rel="stylesheet" href="resources/css/bootstrap.css">
+</head>
+<body>
 <article>
 	<div class="container">
 		<h2>product list</h2>
+		<br>
+		<form action="productList.do" method="get">
+		<label for="condition">검색조건</label>
+		<select name="condition" id="condition">
+			<option value="product_code" <c:if test="${condition eq 'product_code' }">selected</c:if>>제품코드</option>
+			<option value="color_name" <c:if test="${condition eq 'color_name' }">selected</c:if>>색상</option>
+			<option value="gender" <c:if test="${condition eq 'gender' }">selected</c:if>>성별</option>
+		</select>
+		<input type="text" name="keyword" id="keyword"
+			placeholder="검색어 ..." value="${keyword }"/>
+		<button type="submit">검색</button>
+		</form>
 		<div class="table-responsive">
-			<table class="table table-striped table-sm">
+			<table class="table table-hover"> 
 				<colgroup>
 					<col style="width: auto;" />
 					<col style="width: auto;" />
@@ -17,12 +38,6 @@
 					<col style="width: auto;" />
 					<col style="width: auto;" />
 					<col style="width: auto;" />
-					<!-- col style="width: auto;" />
-					<col style="width: auto;" />
-					<col style="width: auto;" />
-					<col style="width: auto;" />
-					<col style="width: auto;" />
-					<col style="width: auto;" /> -->
 				</colgroup>
 				<thead>
 					<tr>
@@ -36,12 +51,6 @@
 						<th>F 사이즈</th>
 						<th>전체 사이즈 재고</th>
 						<th>생산일</th>
-						<!-- th>가격</th>
-						<th>제품 사진</th>
-						<th>제품 설명1</th>
-						<th>제품 설명2</th>
-						<th>제품 설명3</th>
-						<th>제품 설명4</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -64,12 +73,6 @@
 									<td><c:out value="${list.f}" /></td>
 									<td><c:out value="${list.total}" /></td>
 									<td><c:out value="${list.manufacture_day}" /></td>
-									<!-- td><c:out value="${list.product_price}" /></td>
-									<td><c:out value="${list.file}" /></td>
-									<td><c:out value="${list.text1}" /></td>
-									<td><c:out value="${list.text2}" /></td>
-									<td><c:out value="${list.text3}" /></td>
-									<td><c:out value="${list.text4}" /></td> -->
 									<td>
 										<button name="delProdBtn">삭제하기</button>
 									</td>
@@ -86,18 +89,6 @@
 			<input type="submit" name="submit" value="관리자 메인으로" class="manage">
 			</form>
 		</div>
-			<form action="productList.do" method="get">
-		<label for="condition">검색조건</label>
-		<select name="condition" id="condition">
-			<!-- option value="product_name" <c:if test="${condition eq 'product_name' }">selected</c:if>>제품명</option> -->
-			<option value="product_code" <c:if test="${condition eq 'product_code' }">selected</c:if>>제품코드</option>
-			<option value="color_name" <c:if test="${condition eq 'color_name' }">selected</c:if>>색상</option>
-			<option value="gender" <c:if test="${condition eq 'gender' }">selected</c:if>>성별</option>
-		</select>
-		<input type="text" name="keyword" id="keyword"
-			placeholder="검색어 ..." value="${keyword }"/>
-		<button type="submit">검색</button>
-		</form>
 	</div>
 </article>
      <script>
@@ -119,3 +110,5 @@
         }
     });
       </script>
+</body>
+</html>
